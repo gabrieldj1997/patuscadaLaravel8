@@ -8,6 +8,7 @@ if (Session::has('error')) {
     $error = Session::get('error');
 }
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,15 +17,17 @@ if (Session::has('error')) {
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}"></script>
 </head>
+
 <body>
     <div class="container">
         @if (Auth::check())
             <h2>Ola <strong>{{ Auth::user()->nickname }}</strong> </h2>
-            @if(Auth::user()->tp_usuario == 1)
-            <button type="button" class="btn btn-primary"
-                onclick="window.location='{{ route('login.truncate') }}'">Deletar todos usuarios</button>
+            @if (Auth::user()->tp_usuario == 1)
+                <button type="button" class="btn btn-primary"
+                    onclick="window.location='{{ route('login.truncate') }}'">Deletar todos usuarios</button>
             @endif
-                <button type="button" class="btn btn-primary" onclick="window.location='{{ route('chat') }}'">chat</button>
+            <button type="button" class="btn btn-primary"
+                onclick="window.location='{{ route('chat') }}'">chat</button>
             <button type="button" class="btn btn-primary"
                 onclick="window.location='{{ route('login.logout') }}'">logout</button>
 
@@ -55,7 +58,8 @@ if (Session::has('error')) {
                     </div>
                 </div>
             </div>
-            <button id="button-modal-game" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-game">Criar
+            <button id="button-modal-game" type="button" class="btn btn-primary" data-toggle="modal"
+                data-target="#modal-game">Criar
                 jogo</button>
             <div id="modal-game" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
@@ -82,7 +86,8 @@ if (Session::has('error')) {
                     </div>
                 </div>
             </div>
-            <button id="button-modal-game" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-game-enter">Entrar no
+            <button id="button-modal-game" type="button" class="btn btn-primary" data-toggle="modal"
+                data-target="#modal-game-enter">Entrar no
                 jogo</button>
             <div id="modal-game-enter" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
@@ -95,11 +100,11 @@ if (Session::has('error')) {
                             </button>
                         </div>
                         <div class="modal-body">
-                                <div class="row">
-                                    <label for="input-codigo_enter">Codigo do sala:</label>
-                                    <input type="text" id="input-codigo_enter" name="codigo_enter">
-                                    <a class="btn btn-primary" id="button_game_enter">Entrar</a>
-                                </div>
+                            <div class="row">
+                                <label for="input-codigo_enter">Codigo do sala:</label>
+                                <input type="text" id="input-codigo_enter" name="codigo_enter">
+                                <a class="btn btn-primary" id="button_game_enter">Entrar</a>
+                            </div>
                         </div>
                         <div class="modal-footer">
                         </div>
@@ -135,38 +140,47 @@ if (Session::has('error')) {
 
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-@if (Auth::check())
-<script>
-    document.querySelector('#button-modal-game').onclick = () =>{
-    document.querySelector('#input-codigo').value = ''
-    let codigo = ''
-    for(i = 0; i < 5; i++){
-        codigo += String.fromCharCode(Math.floor((Math.random()*26)+65))
-    }
-    document.querySelector('#input-codigo').value = codigo
-    }
-    document.querySelector('#button_game_enter').onclick = () =>{
-        codigo = document.querySelector('#input-codigo_enter').value
-        req = new XMLHttpRequest();
-        req.open('GET', document.location.origin+"/api/jogoApi/find/"+codigo);
-        req.onload = function(){
-            game = JSON.parse(this.response)
-            if(game.id === undefined){
-                alert('Nenhum jogo encontrado')
-            }else{
-                if(game.estado_jogo != 0){
-                    alert('Jogo já iniciado ou encerrado')
-                }else{
-                    document.location.href = location.origin+"/jogo/"+game.id
-                }
-            }
-            
-        }
-        req.send();
-    }
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+</script>
+@if (Auth::check())
+    <script>
+        document.querySelector('#button-modal-game').onclick = () => {
+            document.querySelector('#input-codigo').value = ''
+            let codigo = ''
+            for (i = 0; i < 5; i++) {
+                codigo += String.fromCharCode(Math.floor((Math.random() * 26) + 65))
+            }
+            document.querySelector('#input-codigo').value = codigo
+        }
+        document.querySelector('#button_game_enter').onclick = () => {
+            codigo = document.querySelector('#input-codigo_enter').value
+            req = new XMLHttpRequest();
+            let url = window.location.href;
+            url = url.split('/');
+            let urlBase = '';
+            for (i = 0; i < (url.findIndex(i => i === 'public') != -1 ? url.findIndex(i => i === 'public') : 3); i++) {
+                urlBase += url[i] + '/';
+            }
+            req.open('GET', urlBase + "/api/jogoApi/find/" + codigo);
+            req.onload = function() {
+                game = JSON.parse(this.response)
+                if (game.id === undefined) {
+                    alert('Nenhum jogo encontrado')
+                } else {
+                    if (game.estado_jogo != 0) {
+                        alert('Jogo já iniciado ou encerrado')
+                    } else {
+                        document.location.href = location.origin + "/jogo/" + game.id
+                    }
+                }
+
+            }
+            req.send();
+        }
+    </script>
 @endif
+
 </html>
