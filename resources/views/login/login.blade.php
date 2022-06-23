@@ -158,13 +158,7 @@ if (Session::has('error')) {
         document.querySelector('#button_game_enter').onclick = () => {
             codigo = document.querySelector('#input-codigo_enter').value
             req = new XMLHttpRequest();
-            let url = window.location.href;
-            url = url.split('/');
-            let urlBase = '';
-            for (i = 0; i < (url.findIndex(i => i === 'public') != -1 ? url.findIndex(i => i === 'public') : 3); i++) {
-                urlBase += url[i] + '/';
-            }
-            req.open('GET', urlBase + "/api/jogoApi/find/" + codigo);
+            req.open('GET', document.location.origin+"/api/jogoApi/find/"+codigo);
             req.onload = function() {
                 game = JSON.parse(this.response)
                 if (game.id === undefined) {

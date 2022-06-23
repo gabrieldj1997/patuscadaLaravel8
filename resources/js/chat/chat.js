@@ -2,13 +2,7 @@ require('../bootstrap');
 
 const { default: axios } = require('axios');
 
-let url = window.location.href;
-url = url.split('/');
-let urlBase ='';
-for(i = 0; i < (url.findIndex(i=>i==='public') != -1 ? url.findIndex(i=>i==='public') : 3);i++){
-    urlBase += url[i] + '/';
-}
-const urlMessage = urlBase + '/send-message';
+const urlMessage = window.location.origin + '/send-message';
 
 // Enable pusher logging - don't include this in production
 Pusher.logToConsole = true;

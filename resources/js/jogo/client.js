@@ -7,19 +7,13 @@ const { default: axios } = require('axios');
 // Pusher.logToConsole = true;
 
 //URL's
-let url = window.location.href;
-url = url.split('/');
-let urlBase ='';
-for(i = 0; i < (url.findIndex(i=>i==='public') != -1 ? url.findIndex(i=>i==='public') : 3);i++){
-    urlBase += url[i] + '/';
-}
-const getCartaPreta = urlBase + 'api/cartaspretas';
-const getCartaBranca = urlBase + 'api/cartasbrancas';
-const chosseCartaPreta = urlBase + `api/jogoApi/${document.location.pathname.split('/')[2]}/cartapreta`;
-const chosseCartaBranca = urlBase + `api/jogoApi/${document.location.pathname.split('/')[2]}/cartabranca`;
-const chosseVencedor = urlBase + `api/jogoApi/${document.location.pathname.split('/')[2]}/vencedor`;
-const changeCartas = urlBase + `api/jogoApi/${document.location.pathname.split('/')[2]}/changeCartas`;
-const getNickname = urlBase + `api/user`;
+const getCartaPreta = window.location.origin + '/api/cartaspretas';
+const getCartaBranca = window.location.origin + '/api/cartasbrancas';
+const chosseCartaPreta = window.location.origin + `/api/jogoApi/${document.location.pathname.split('/')[2]}/cartapreta`;
+const chosseCartaBranca = window.location.origin + `/api/jogoApi/${document.location.pathname.split('/')[2]}/cartabranca`;
+const chosseVencedor = window.location.origin + `/api/jogoApi/${document.location.pathname.split('/')[2]}/vencedor`;
+const changeCartas = window.location.origin + `/api/jogoApi/${document.location.pathname.split('/')[2]}/changeCartas`;
+const getNickname = window.location.origin + `/api/user`;
 
 //Variaveis
 const gameId = document.location.pathname.split('/')[2];
