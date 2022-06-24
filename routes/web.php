@@ -37,10 +37,6 @@ Route::get('/chat', function () {
 })->middleware('auth')->name('chat');
 
 Route::controller(LoginController::class)->prefix('login')->name('login.')->group(function () {
-    //rotas front-end
-    Route::get('/entrar', 'Index')->name('index');
-    Route::get('/cadastro', 'Register')->name('cadaster');
-    //rotas back-end
     Route::post('/cadastrar', 'RegisterLogin')->name('register');
     Route::post('/autenticate', 'AutenticateLogin')->name('autenticate'); 
     Route::get('/users-online', 'UsersOnline')->name('usersOnline');

@@ -1,0 +1,30 @@
+body{
+    background-image: url('/img/wallpaper-banner.jpg');
+    background-size: cover;   
+}
+.container{
+    background: #0018;
+    height: 100vh;
+    box-shadow: cyan 0px 0px 30px;
+    padding: 0px;
+}
+.dropdown-item{
+    color: rgb(255,255,255,0.5)
+}
+.button-modal{
+    margin: 20px 0px 0px 0px;
+}
+.modal-body{
+    padding: 10px;
+}
+.modal-content{
+    box-shadow: cyan 0px 0px 30px 0px;
+}
+.modal-style{
+    background: #0018;
+    color: rgb(255,255,255,0.5);
+}
+.modal-input{
+    width: 100%;
+    background-color: rgb(255,255,255,0.5);
+}

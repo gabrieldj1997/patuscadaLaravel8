@@ -16,16 +16,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class LoginController extends Controller
 {
-    //Front-end
-    public function Index()
-    {
-        return view('login.login');
-    }
-    public function Register()
-    {
-        return view('login/register');
-    }
-    //Back-end
     public function AutenticateLogin(Request $req)
     {
         try {
@@ -39,6 +29,9 @@ class LoginController extends Controller
     }
     public function RegisterLogin(LoginFormRequest $req)
     {
+        if($req->input('passord') != $req->input('password_confirmation')){
+            return redirect()->route('index')->with('error', 'Senhas não conferem.');
+        }
         try {
             $login = new User();
             $login->name = $req->input('name');
@@ -48,7 +41,7 @@ class LoginController extends Controller
             $login->save();
 
             if (Auth::attempt(['nickname' => $req->input('nickname'), 'password' => $req->input('password')], true)) {
-                return redirect()->route('login.index')->with('message', 'Usuario cadastrado com sucesso.');
+                return redirect()->route('index')->with('message', 'Usuario cadastrado com sucesso.');
             }
             return redirect()->back();
         } catch (Exception $e) {

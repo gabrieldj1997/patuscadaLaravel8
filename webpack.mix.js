@@ -18,9 +18,11 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/jogo/client.js', 'public/js/jogo/client.js')
     .sass('resources/sass/app.scss', 'public/css')
     .styles([
-        'resources/css/app.css',
-        'resources/css/chat.css',
+        'resources/css/app.css'
     ], 'public/css/style.css')
+    .styles(['resources/css/app.css'
+        , 'resources/css/chat.css'],
+        'public/css/chat.css')
     .sourceMaps()
     .version()
     .scripts('resources/bootstrap/dist/js/bootstrap.bundle.js', 'public/js/bootstrap.js')

@@ -10,7 +10,7 @@
     <title>Patuscada</title>
 
     <link rel="stylesheet" href="{{ url(mix('css/app.css')) }}">
-    <link rel="stylesheet" href="{{ url(mix('css/style.css')) }}">
+    <link rel="stylesheet" href="{{ url(mix('css/chat.css')) }}">
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 </head>
 
