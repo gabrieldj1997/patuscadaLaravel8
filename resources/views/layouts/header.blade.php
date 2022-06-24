@@ -4,12 +4,13 @@
         </div>
         <div class="col-md-6">
             <a class="navbar-brand" href="#">Patuscada</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+
         </div>
     </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <div>
             <ul class="navbar-nav mr-auto">
@@ -18,7 +19,7 @@
                         <a class="nav-link" href="gbltech.com.br">GBLTech</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('chat')}}">chat</a>
+                        <a class="nav-link" href="{{ route('chat') }}">chat</a>
                     </li>
                     <li class="nav-item">
                         <a id="button-modal-game" class="nav-link" href="#" data-toggle="modal"
@@ -52,7 +53,8 @@
                             {{ __('Login') }}
                         </a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-login-cadaster">Log up</a>
+                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                data-target="#modal-login-cadaster">Log up</a>
                             <a class="dropdown-item" href="#" data-toggle="modal"
                                 data-target="#modal-form-login">Log in</a>
                         </div>

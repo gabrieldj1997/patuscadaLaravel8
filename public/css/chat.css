@@ -3,6 +3,7 @@ body{
     background-size: cover;   
 }
 .container{
+    position: relative;
     background: #0018;
     height: 100vh;
     box-shadow: cyan 0px 0px 30px;
@@ -28,6 +29,32 @@ body{
     width: 100%;
     background-color: rgb(255,255,255,0.5);
 }
+.footer{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    color: rgb(255,255,255,0.5);
+}
+
+.social-footer{
+    display: flex;
+    flex-direction: row;
+}
+
+.social-footer li {
+    margin-left: 20px;
+  }
+  
+ .social-footer li a {
+    color: #aaa;
+  }
+  
+.social-footer li a:hover {
+    color: #29a19c;
+  }
+  
 .chat-container{
     display: flex;
     align-content: space-between;

@@ -29,7 +29,7 @@ class LoginController extends Controller
     }
     public function RegisterLogin(LoginFormRequest $req)
     {
-        if($req->input('passord') != $req->input('password_confirmation')){
+        if($req->input('password') != $req->input('password_confirmation')){
             return redirect()->route('index')->with('error', 'Senhas não conferem.');
         }
         try {

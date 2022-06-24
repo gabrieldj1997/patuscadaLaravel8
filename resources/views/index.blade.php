@@ -17,6 +17,7 @@ if (Session::has('error')) {
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://kit.fontawesome.com/e68b1aba6f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -41,6 +42,7 @@ if (Session::has('error')) {
             </div>
         @endforeach
     @endif
+    @include('layouts.footer')
     </div>
 </body>
 
