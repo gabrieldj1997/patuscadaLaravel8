@@ -20,11 +20,11 @@ class LoginController extends Controller
     {
         try {
             if (Auth::attempt(['nickname' => $req->input('nickname'), 'password' => $req->input('password')], true)) {
-                return view('login.login', ['message' => 'Login efetuado com sucesso.']);
+                return redirect()->route('index')->with(['message' => 'Login efetuado com sucesso.']);
             }
-            return view('login.login', ['error' => 'Usuario ou senha invalidos.']);
+            return redirect()->route('index')->with(['error' => 'Usuario ou senha invalidos.']);
         } catch (Exception $e) {
-            return view('login.login', ['error' => 'Erro no servidor. ' . $e->getMessage()]);
+            return redirect()->route('index')->with(['error' => 'Erro no servidor. ' . $e->getMessage()]);
         }
     }
     public function RegisterLogin(LoginFormRequest $req)
@@ -82,19 +82,19 @@ class LoginController extends Controller
     {
         if (Auth::check()) {
             if (Auth::user()->id != $id) {
-                return redirect()->route('login.index')->with('error', 'Não é possivel deletar outro usuario.');
+                return redirect()->route('index')->with('error', 'Não é possivel deletar outro usuario.');
             }
             try {
                 $player = User::find($id);
                 if (isset($player) && Hash::check($req->input('password'), $player->password)) {
                     Auth::logout();
                     $player->delete();
-                    return redirect()->route('login.index')->with('message', 'Usuario deletado com sucesso.');
+                    return redirect()->route('index')->with('message', 'Usuario deletado com sucesso.');
                 } else {
-                    return redirect()->route('login.index')->with('error', 'Senha invalida.');
+                    return redirect()->route('index')->with('error', 'Senha invalida.');
                 }
             } catch (Exception $e) {
-                return redirect()->route('login.index')->with('error', 'Error no servidor. ' . $e->getMessage());
+                return redirect()->route('index')->with('error', 'Error no servidor. ' . $e->getMessage());
             }
         } else {
 
@@ -111,12 +111,12 @@ class LoginController extends Controller
         Auth::logout();
         User::truncate();
 
-        return redirect('/login/entrar');
+        return redirect()->route('index');
     }
     public function Logout()
     {
         Auth::logout();
-        return redirect('/login/entrar');
+        return redirect()->route('index');
     }
     public function Captcha(Request $req)
     {
