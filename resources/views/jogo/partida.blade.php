@@ -61,7 +61,7 @@
     @else
         <h1>Jogo não encontrado</h1>
         <button type="button" class="btn btn-primary"
-            onclick="window.location='{{ route('login.index') }}'">Login</button>
+            onclick="window.location='{{ route('index') }}'">Login</button>
     @endif
 
     @if (Auth::user()->id == $jogo->id_jogador_criador)
@@ -79,7 +79,7 @@
         @endif
     @endif
     <button type="button" class="btn btn-primary"
-        onclick="window.location='{{ route('login.index') }}'">Voltar</button>
+        onclick="window.location='{{ route('index') }}'">Voltar</button>
 </body>
 @if ($jogo->estado_jogo == 0)
     <script src="{{ url(mix('js/jogo.js')) }}"></script>

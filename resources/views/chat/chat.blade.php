@@ -24,7 +24,7 @@
                     </div>
                     <div class="header-section-bar d-flex justify-content-end col-md-3">
                         <button type="button" class="btn btn-primary"
-                            onclick="window.location='{{ route('login.index') }}'">Voltar</button>
+                            onclick="window.location='{{ route('index') }}'">Voltar</button>
                     </div>
                 </div>
             </div>
