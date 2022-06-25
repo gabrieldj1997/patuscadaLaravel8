@@ -101,9 +101,9 @@ class LoginController extends Controller
             $player = User::find()->where('id', $id)->where('password', Hash::make($req->input('password')))->first();
             if (isset($player)) {
                 $player->delete();
-                return redirect()->route('login.index')->with('message', 'Usuario deletado com sucesso.');
+                return redirect()->route('index')->with('message', 'Usuario deletado com sucesso.');
             }
-            return redirect()->route('login.index')->with('error', 'Usuario ou senha invalidos, usuario de id ' . $id . ' não encontrado.');
+            return redirect()->route('index')->with('error', 'Usuario ou senha invalidos, usuario de id ' . $id . ' não encontrado.');
         }
     }
     public function Truncate()
