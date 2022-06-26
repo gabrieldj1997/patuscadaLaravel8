@@ -110,7 +110,7 @@
             (object) [
                 'label' => 'Codigo do sala:',
                 'id' => 'input-codigo_enter',
-                'name' => 'codigo_enter',
+                'name' => 'codigo',
                 'type' => 'text',
             ],
         ],

@@ -7,18 +7,11 @@ const { default: axios } = require('axios');
 // Pusher.logToConsole = true;
 
 //URL's
-let url = window.location.href;
-url = url.split('/');
-let urlBase ='';
-for(i = 0; i < (url.findIndex(i=>i==='public') != -1 ? url.findIndex(i=>i==='public') : 3);i++){
-    urlBase += url[i] + '/';
-}
-const startGame = urlBase + '/api/jogoApi/start';
-const finishRodada = urlBase + '/api/jogoApi/next';
+const startGame = window.location.origin + '/api/jogoApi/start';
+const finishRodada = window.location.origin + '/api/jogoApi/next';
 
 //Variaveis
 const jogadores_list = document.querySelector('#list_Jogadores');
-const gameId = document.location.pathname.split('/')[2];
 const buttonFinalizarRodada = document.querySelector('#buttonFinalizarRodada');
 const inputIdJogo = document.querySelector('#inputIdJogo');
 const inputJogadorGanhador = document.querySelector('#inputJogadorGanhador');
@@ -26,7 +19,7 @@ const inputCartaBrancaDescartada = document.querySelector('#inputCartaBrancaDesc
 const inputCartaPretaDescartada = document.querySelector('#inputCartaPretaDescartada');
 const inputCartaBrancaGanhadora = document.querySelector('#inputCartaBrancaGanhadora');
 
-window.Echo.channel('jogo-jogada-' + gameId)
+window.Echo.channel('jogo-jogada-' + jogoId)
     .listen('.jogadas', (data) => {
         if (data.tp_jogada == 1) {
             inputCartaPretaDescartada.value = data.cartas.id
@@ -77,7 +70,7 @@ if (estadoJogo == 0) {
                 method: 'POST',
                 url: startGame,
                 data: {
-                    id_jogo: gameId,
+                    id_jogo: jogoId,
                     id_user: myId,
                     jogadores: jogadores
                 }

@@ -16,7 +16,6 @@ const changeCartas = window.location.origin + `/api/jogoApi/${document.location.
 const getNickname = window.location.origin + `/api/user`;
 
 //Variaveis
-const gameId = document.location.pathname.split('/')[2];
 const box_cartas_brancas_leitor = document.querySelector('#box_cartas_brancas_leitor');
 const box_cartas_brancas_jogador = document.querySelector('#box_cartas_brancas');
 const box_cartas_pretas_leitor = document.querySelector('#box_cartas_pretas_leitor');
@@ -26,12 +25,12 @@ const botao_cartas_pretas = document.querySelectorAll('.button_carta_preta');
 const cartas_pretas_leitor = document.querySelectorAll('.carta_preta_leitor');
 const button_trocar_cartas = document.querySelector('#button_trocar_cartas');
 
-window.Echo.channel('jogo-message-' + gameId)
+window.Echo.channel('jogo-message-' + jogoId)
     .listen('.message', (data) => {
         MessageTrigger(data)
     });
 
-window.Echo.channel('jogo-jogada-' + gameId)
+window.Echo.channel('jogo-jogada-' + jogoId)
     .listen('.jogadas', (data) => {
         JogadaTrigger(data)
     })

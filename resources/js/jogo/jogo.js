@@ -9,7 +9,7 @@ const users_list = document.querySelector('#list_Jogadores');
 
 
 
-window.Echo.join('App.jogo-' + gameId)
+window.Echo.join('App.jogo-' + jogoId)
     .joining((user) => {
         let element = document.getElementsByClassName(`jogador-${user.nickname}`);
         if (element.length == 0 && users_list != null) {
@@ -42,7 +42,7 @@ window.Echo.join('App.jogo-' + gameId)
         })
     });
 
-window.Echo.channel('jogo-message-' + gameId)
+window.Echo.channel('jogo-message-' + jogoId)
     .listen('.message', () => {
         window.location.href = window.location.href;
     });
