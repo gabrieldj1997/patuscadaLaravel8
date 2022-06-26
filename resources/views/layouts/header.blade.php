@@ -103,9 +103,9 @@
     @include('layouts.modalForm', [
         'id_modal' => 'modal-game-enter',
         'title_modal' => 'Entrar Sala de Jogo',
-        'id_modal_form' => 'form_game',
+        'id_modal_form' => 'form_game_input',
         'method_modal_form' => 'POST',
-        'action_modal_form' => route('api.jogoApi.find'),
+        'action_modal_form' => route('jogoApi.find'),
         'inputs_modal_form' => [
             (object) [
                 'label' => 'Codigo do sala:',

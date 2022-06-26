@@ -45,7 +45,7 @@ Route::controller(CartasBrancasController::class)->prefix('cartasbrancas')->name
 Route::controller(JogoController::class)->prefix('jogoApi')->name('jogoApi.')->group(function(){
     Route::post('/start', 'StartPartida')->name('start');
     Route::post('/next', 'FinalizarRodada')->name('next');
-    Route::get('/find/{codigo}', 'FindPartida')->name('find');
+    Route::get('/find', 'FindPartida')->name('find');
     //Eventos de Jogo
     Route::post('/{jogoId}/cartapreta', 'ChooseCartaPreta')->name('chossecartapreta');
     Route::post('/{jogoId}/cartabranca', 'ChooseCartaBranca')->name('chossecartabranca');

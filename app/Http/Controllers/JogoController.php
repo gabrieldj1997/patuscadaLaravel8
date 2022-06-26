@@ -227,9 +227,9 @@ class JogoController extends Controller
         $jogo->save();
     }
 
-    public function FindPartida($codigo)
+    public function FindPartida(Request $req)
     {
-        $jogo = Jogo::where('codigo', $codigo)->first();
+        $jogo = Jogo::where('codigo', $req->input('codigo'))->first();
         if ($jogo == null) {
             return redirect()->route('index')->with(["error" => "Jogo não encontrado"]);
         }
