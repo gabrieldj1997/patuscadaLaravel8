@@ -63,25 +63,6 @@ if (Session::has('error')) {
             }
             document.querySelector('#input-codigo').value = codigo
         }
-        document.querySelector('#button_game_enter').onclick = () => {
-            codigo = document.querySelector('#input-codigo_enter').value
-            req = new XMLHttpRequest();
-            req.open('GET', document.location.origin+"/api/jogoApi/find/"+codigo);
-            req.onload = function() {
-                game = JSON.parse(this.response)
-                if (game.id === undefined) {
-                    alert('Nenhum jogo encontrado')
-                } else {
-                    if (game.estado_jogo != 0) {
-                        alert('Jogo já iniciado ou encerrado')
-                    } else {
-                        document.location.href = location.origin + "/jogo/" + game.id
-                    }
-                }
-
-            }
-            req.send();
-        }
     </script>
 @endif
 
