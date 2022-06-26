@@ -233,7 +233,7 @@ class JogoController extends Controller
         if ($jogo == null) {
             return redirect()->route('index')->with(["error" => "Jogo não encontrado"]);
         }
-        return redirect()->route('index')->with($jogo);
+        return redirect()->route('jogo.partida',["id" => $jogo->id]);
     }
 
     public function ChooseCartaPreta(Request $req, $jogoId)
