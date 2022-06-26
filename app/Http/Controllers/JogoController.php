@@ -231,9 +231,9 @@ class JogoController extends Controller
     {
         $jogo = Jogo::where('codigo', $codigo)->first();
         if ($jogo == null) {
-            return json_encode(["error" => "Jogo não encontrado"]);
+            return redirect()->route('index')->with(["error" => "Jogo não encontrado"]);
         }
-        return json_encode($jogo);
+        return redirect()->route('index')->with($jogo);
     }
 
     public function ChooseCartaPreta(Request $req, $jogoId)

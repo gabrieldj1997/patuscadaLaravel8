@@ -105,7 +105,7 @@
         'title_modal' => 'Entrar Sala de Jogo',
         'id_modal_form' => 'form_game',
         'method_modal_form' => 'POST',
-        'action_modal_form' => route('jogo.create'),
+        'action_modal_form' => route('api.jogoApi.find'),
         'inputs_modal_form' => [
             (object) [
                 'label' => 'Codigo do sala:',
