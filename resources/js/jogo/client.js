@@ -115,7 +115,7 @@ if (button_trocar_cartas != null) {
                 }
             }
             axios(options);
-            button_trocar_cartas.parentElement.remove();
+            button_trocar_cartas.parentElement.parentElement.remove();
         }
     })
 }
@@ -139,10 +139,11 @@ if (button_mostrar_cartas_brancas != null) {
 function MessageTrigger(message) {
     //primeira classe
     //1 = Partida; 2 = cartas; 3= rodada; 4 = jogador;
+    debugger
     switch (message.data.tp_message[0]) {
         case 1:
             if (message.data.tp_message[1] == 2) {
-                window.location.href = window.location.href;
+                location.reload();
             } else if (message.data.tp_message[1] == 3) {
                 document.querySelector('#mensagens').innerHTML = `<h1>Jogo finalizado! ${message.data.message}</h1>`
             }
@@ -151,7 +152,7 @@ function MessageTrigger(message) {
             if (message.data.tp_message[1] == 1) {
                 //loading com mensagem "Embaralhando e distirbuindo as cartas..."
             } else {
-                window.location.href = window.location.href;
+                location.reload();
             }
             break;
         case 3:
@@ -160,15 +161,32 @@ function MessageTrigger(message) {
     }
 }
 
+function EmbaralharCartasBrancas() {
+    let elements = [];
+    let cartasCount = box_cartas_brancas_leitor.childElementCount
+    for (i = 0; i < cartasCount; i++) {
+        elements.push(box_cartas_brancas_leitor.children[0])
+        box_cartas_brancas_leitor.children[0].remove()
+    }
+    for (i = 0; i < cartasCount; i++) {
+        box_cartas_brancas_leitor.append(elements.splice((elements.length * Math.random()) >> 0, 1)[0])
+        box_cartas_brancas_leitor.children[i].firstChild.attributes.removeNamedItem('cartaVirada')
+    }
+}
+
 async function JogadaTrigger(message) {
     var tpJogador = TipoJogador();
     if (tpJogador == 1) {
         if (message.tp_jogada == 2) {
-            button_mostrar_cartas_brancas.hidden = false
-            var carta = await GeradorCarta(message.cartas.id, 'branca', message.jogadorId);
+            if (document.querySelector('.carta_branca_empty')) {
+                document.querySelector('.carta_branca_empty').parentElement.remove()
+            }
+            var carta = await GeradorCarta(message.cartas.id, 'branca', message.jogadorId, true);
             box_cartas_brancas_leitor.innerHTML += carta;
             let botao_cartas_brancas_leitor = document.querySelectorAll('.button_carta_branca_leitor');
-            if (botao_cartas_brancas_leitor.length > 0) {
+            if (botao_cartas_brancas_leitor.length == jogadores.length - 1) {
+                EmbaralharCartasBrancas();
+                document.querySelector('#mensagens').innerHTML = `<p>Escolha a carta branca vencedora.</p>`
                 botao_cartas_brancas_leitor.forEach(carta => {
                     carta.addEventListener('click', (event) => {
                         let idCartaPreta = document.querySelector('.carta_preta').attributes.idcartapreta.value
@@ -196,7 +214,7 @@ async function JogadaTrigger(message) {
             }
         } else if (message.tp_jogada == 1) {
             document.querySelector('#mensagens').innerHTML = `<p>Aguarde todos escolherem uma carta branca</p>`
-            button_trocar_cartas.remove();
+            button_trocar_cartas.parentElement.remove();
         }
     } else {
         if (message.tp_jogada == 1) {
@@ -229,7 +247,7 @@ async function JogadaTrigger(message) {
     }
 }
 
-async function GeradorCarta(id, tipo, idUser) {
+async function GeradorCarta(id, tipo, idUser, cartaVirada = false) {
     var cartaObj;
     var option = {
         method: 'GET',
@@ -238,7 +256,7 @@ async function GeradorCarta(id, tipo, idUser) {
     cartaObj = await axios(option);
     cartaObj = cartaObj.data
     var carta = `<div class="col-md-6">`
-    carta += (tipo == 'branca') ? `<div class="carta_branca card bg-light mb-3" style="max-width: 18rem;" hidden ` : `<div class="carta_preta card text-white bg-dark mb-3" style="max-width: 18rem;"`
+    carta += (tipo == 'branca') ? `<div ${((cartaVirada) ? 'cartaVirada' : '')} class="carta_branca card bg-light mb-3" style="max-width: 18rem;" ` : `<div class="carta_preta card text-white bg-dark mb-3" style="max-width: 18rem;"`
     carta += ((tipo == 'branca') ? `idCartaBranca="${cartaObj.id}"` : `idCartaPreta="${cartaObj.id}"`) + ` idJogador="${idUser}">`
     carta += ((tipo == 'branca') ? `<a href='#' class='button_carta_branca_leitor' idCartaBranca="${cartaObj.id}" idJogador="${idUser}">` : `<a href='#' class=''>`)
     carta += `<div class="card-header">`

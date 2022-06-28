@@ -26,6 +26,9 @@
                 var jogadorLeitor =
                     '<?= json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador ?>';
                 var jogadorCriador = '<?= $jogo->id_jogador_criador ?>';
+                var jogadores = '<?= $jogadores ?>';
+                jogadores = JSON.parse(jogadores);
+                jogadores = jogadores.map(i => { return i.id})
             </script>
         @endif
     @endif
@@ -44,55 +47,6 @@
 
                 <!--Jogo estado iniciado-->
             @else
-                {{-- <div class="row ">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div id="mensagens">
-                                    @if (json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador == Auth::user()->id)
-                                        <h1>Escolha uma carta preta</h1>
-                                    @else
-                                        <h1>Aguarde o
-                                            {{ App\Models\User::find(json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador)->nickname }}
-                                            escolher uma carta preta</h1>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div id="box_cartas_pretas" style="display: none;"></div>
-                            </div>
-                            <div class="col-md-4">
-                                <div id="pontuacao_board">
-                                    <h2>Pontuação:</h2>
-                                    <div id="pontuacao">
-                                        @foreach ($jogadores as $jogador)
-                                            <div>
-                                                <p>{{ App\Models\User::find($jogador->id_jogador)->nickname }} :
-                                                    {{ count(json_decode($jogador->pontuacao)) }}</p>
-                                            </div>
-                                        @endforeach
-                                        <div>
-                                            <p>Cartas Brancas restantes:
-                                                {{ count(json_decode($jogo->cartas_brancas_monte)) }}
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p>Cartas Pretas restantes:
-                                                {{ count(json_decode($jogo->cartas_pretas_monte)) }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div id="box_cartas_brancas_leitor" style="display: none;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        @include('jogo.telaCentral')
-                    </div>
-                </div> --}}
                 <div class="row">
                     <div class="col-12">
                         <div id="mensagens">

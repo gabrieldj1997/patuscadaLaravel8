@@ -100,28 +100,39 @@ body{
 
 .carta_branca {
     font-size: 75%;
-    height: 80%;
+    height: 90%;
     border: black 2px solid;
     border-radius: 20px;
 }
 
+.carta_branca[cartaVirada] {
+    color: white;
+    font-size: 75%;
+    height: 90%;
+    border: black 2px solid;
+    border-radius: 20px;
+}
+.carta_branca[cartaVirada] a {
+    color: rgba(0, 0, 0, 0.03);
+}
+
 .carta_branca_leitor {
     font-size: 75%;
-    height: 80%;
+    height: 90%;
     border: black 2px solid;
     border-radius: 20px;
 }
 
 .carta_preta {
     font-size: 75%;
-    height: 80%;
+    height: 90%;
     border: whitesmoke 2px solid;
     border-radius: 20px;
 }
 
 .carta_preta_leitor {
     font-size: 75%;
-    height: 80%;
+    height: 90%;
     border: whitesmoke 2px solid;
     border-radius: 20px;
 }

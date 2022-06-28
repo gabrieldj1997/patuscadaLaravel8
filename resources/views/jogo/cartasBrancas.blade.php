@@ -4,8 +4,6 @@
             <div id="div_button_leitor">
                 <button type="button" class="btn btn-primary" id="button_trocar_cartas">Trocar todas cartas
                     brancas</button>
-                <button type="button" class="btn btn-primary" id="button_mostrar_cartas_brancas" hidden>Mostrar cartas
-                    brancas</button>
             </div>
         </div>
     @endif
