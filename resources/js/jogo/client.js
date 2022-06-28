@@ -144,11 +144,13 @@ function MessageTrigger(message) {
             if (message.data.tp_message[1] == 2) {
                 window.location.href = window.location.href;
             } else if (message.data.tp_message[1] == 3) {
-                document.querySelector('#mensagens').innerHTML = `<p>Jogo finalizado! ${message.data.message}</p>`
+                document.querySelector('#mensagens').innerHTML = `<h1>Jogo finalizado! ${message.data.message}</h1>`
             }
             break;
         case 2:
-            if (message.data.tp_message[1] != 1) {
+            if (message.data.tp_message[1] == 1) {
+                //loading com mensagem "Embaralhando e distirbuindo as cartas..."
+            } else {
                 window.location.href = window.location.href;
             }
             break;
