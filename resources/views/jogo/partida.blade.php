@@ -10,6 +10,8 @@
     <title>Jogo</title>
 
     <link href="{{ url(mix('css/app.css')) }}" rel="stylesheet">
+    <link href="{{ asset('css/jogo.css') }}" rel="stylesheet">
+
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="{{ url(mix('js/app.js')) }}"></script>
@@ -30,56 +32,108 @@
 </head>
 
 <body>
-    <div id="mensagens">
-        @if ($jogo->estado_jogo != 0)
-            @if (json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador == Auth::user()->id)
-                <h1>Escolha uma carta preta</h1>
+    <div class="container">
+
+        @include('layouts.header', ['jogo', $jogo])
+        @if (isset($jogo))
+
+            <!--Jogo estado aguardando inicio-->
+            @if ($jogo->estado_jogo == 0)
+                @include('jogo.salaEspera')
+
+
+                <!--Jogo estado iniciado-->
             @else
-                <h1>Aguarde o {{App\Models\User::find(json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador)->nickname}} escolher uma carta preta</h1>
+                {{-- <div class="row ">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div id="mensagens">
+                                    @if (json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador == Auth::user()->id)
+                                        <h1>Escolha uma carta preta</h1>
+                                    @else
+                                        <h1>Aguarde o
+                                            {{ App\Models\User::find(json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador)->nickname }}
+                                            escolher uma carta preta</h1>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="box_cartas_pretas" style="display: none;"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="pontuacao_board">
+                                    <h2>Pontuação:</h2>
+                                    <div id="pontuacao">
+                                        @foreach ($jogadores as $jogador)
+                                            <div>
+                                                <p>{{ App\Models\User::find($jogador->id_jogador)->nickname }} :
+                                                    {{ count(json_decode($jogador->pontuacao)) }}</p>
+                                            </div>
+                                        @endforeach
+                                        <div>
+                                            <p>Cartas Brancas restantes:
+                                                {{ count(json_decode($jogo->cartas_brancas_monte)) }}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p>Cartas Pretas restantes:
+                                                {{ count(json_decode($jogo->cartas_pretas_monte)) }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="box_cartas_brancas_leitor" style="display: none;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        @include('jogo.telaCentral')
+                    </div>
+                </div> --}}
+                <div class="row">
+                    <div class="col-12">
+                        <div id="mensagens">
+                            @if (json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador == Auth::user()->id)
+                                <p>Escolha uma carta preta</p>
+                            @else
+                                <p>Aguarde o
+                                    {{ App\Models\User::find(json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador)->nickname }}
+                                    escolher uma carta preta</p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        @include('jogo.cartasPretas')
+
+                        @include('jogo.cartasBrancasEscolhidas')
+
+                        @include('jogo.pontuacao')
+                    </div>
+                    <div class="col-6">
+                        @include('jogo.cartasBrancas')
+                    </div>
+                </div>
             @endif
-            @foreach ($jogadores as $jogador)
-                <div>{{ App\Models\User::find($jogador->id_jogador)->nickname }} : {{ count(json_decode($jogador->pontuacao)) }}</div>
-            @endforeach
-            <div>
-                <p>Cartas Brancas restantes: {{count(json_decode($jogo->cartas_brancas_monte))}}</p>
-            </div>
-            <div>
-                <p>Cartas Pretas restantes: {{count(json_decode($jogo->cartas_pretas_monte))}}</p>
-            </div>
-        @endIf
-    </div>
-    @if (isset($jogo))
-        <!--Jogo estado aguardando inicio-->
-        @if ($jogo->estado_jogo == 0)
-            @include('jogo.salaEspera')
-
-            <!--Jogo estado iniciado-->
         @else
-            @include('jogo.telaCentral')
-            <!--Jogo encerrado-->
+            <h1>Jogo não encontrado</h1>
+            <button type="button" class="btn btn-primary"
+                onclick="window.location='{{ route('index') }}'">Voltar</button>
         @endif
-    @else
-        <h1>Jogo não encontrado</h1>
-        <button type="button" class="btn btn-primary"
-            onclick="window.location='{{ route('index') }}'">Login</button>
-    @endif
 
-    @if (Auth::user()->id == $jogo->id_jogador_criador)
-        <button type="button" class="btn btn-primary" style="display:none;" id="buttonFinalizarRodada">Finalizar
-            rodada</button>
-        <input id="inputIdJogo" type="text" style="display: none;"/>
-        <input id="inputJogadorGanhador" type="text" style="display: none;"/>
-        <input id="inputCartaBrancaDescartada" type="text" style="display: none;"/>
-        <input id="inputCartaPretaDescartada" type="text" style="display: none;"/>
-        <input id="inputCartaBrancaGanhadora" type="text" style="display: none;"/>
-    @endif
-    @if ($jogo->estado_jogo != 0)
-        @if (json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador == Auth::user()->id)
-            <button type="button" class="btn btn-primary" id="button_trocar_cartas">Trocar todas cartas brancas</button>
+        @if (Auth::user()->id == $jogo->id_jogador_criador)
+            <input id="inputIdJogo" type="text" style="display: none;" />
+            <input id="inputJogadorGanhador" type="text" style="display: none;" />
+            <input id="inputCartaBrancaDescartada" type="text" style="display: none;" />
+            <input id="inputCartaPretaDescartada" type="text" style="display: none;" />
+            <input id="inputCartaBrancaGanhadora" type="text" style="display: none;" />
         @endif
-    @endif
-    <button type="button" class="btn btn-primary"
-        onclick="window.location='{{ route('index') }}'">Voltar</button>
+
+    </div>
 </body>
 @if ($jogo->estado_jogo == 0)
     <script src="{{ url(mix('js/jogo.js')) }}"></script>

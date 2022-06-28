@@ -5,9 +5,10 @@ body{
 .container{
     position: relative;
     background: #0018;
-    height: 100vh;
+    min-height: 100vh;
     box-shadow: cyan 0px 0px 30px;
     padding: 0px;
+    overflow: auto;
 }
 .dropdown-item{
     color: rgb(255,255,255,0.5)

@@ -1,0 +1,108 @@
+#sala_espera {
+    background-color: rgb(0, 0, 0, 0.7);
+    color: rgb(255, 255, 255, 0.5);
+    padding: 20px;
+    margin: 10px;
+    box-shadow: aquamarine 0px 0px 18px 0px;
+    border-radius: 30px;
+}
+
+#list_Jogadores li {
+    list-style: none;
+    margin: 10px;
+}
+
+#pontuacao_board {
+    color: rgb(255, 255, 255, 0.8);
+    text-align: start;
+    padding: 20px;
+}
+
+#mensagens {
+    color: rgb(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px;
+}
+
+#carta_preta_escolhida {
+    color: rgb(255, 255, 255, 0.8);
+    text-align: start;
+    padding: 20px;
+}
+
+#cartas_brancas_escolhidas {
+    color: rgb(255, 255, 255, 0.8);
+    text-align: start;
+    padding: 20px;
+}
+
+#tela_central {
+    padding: 20px;
+}
+
+.carta_branca {
+    font-size: 75%;
+    height: 80%;
+    border: black 2px solid;
+    border-radius: 20px;
+}
+
+.carta_branca_leitor {
+    font-size: 75%;
+    height: 80%;
+    border: black 2px solid;
+    border-radius: 20px;
+}
+
+.carta_preta {
+    font-size: 75%;
+    height: 80%;
+    border: whitesmoke 2px solid;
+    border-radius: 20px;
+}
+
+.carta_preta_leitor {
+    font-size: 75%;
+    height: 80%;
+    border: whitesmoke 2px solid;
+    border-radius: 20px;
+}
+.carta_vencedora{
+    box-shadow: blue 0px 0px 1px 4px;
+}
+
+.card-header {
+    text-align: center;
+}
+#box_cartas_pretas_leitor{
+    max-height: 25vh;
+    overflow-y: scroll;
+    box-shadow: cyan 0 0 10px 3px;
+    border-radius: 20px 20px 0px 0px;
+    margin: 0px 6px;
+    padding: 15px 0px;
+}
+#box_cartas_brancas{
+    max-height: 75vh;
+    overflow-y: scroll;
+    box-shadow: cyan 0 0 10px 3px;
+    border-radius: 20px;
+    margin: 0px 6px;
+    padding: 15px 0px;
+}
+#box_cartas_brancas_escolhidas{
+    max-height: 25vh;
+    overflow-y: scroll;
+    box-shadow: cyan 0 0 10px 3px;
+    border-radius: 0px;
+    margin: 5px 6px;
+    padding: 15px 0px;
+}
+#pontuacao_board{
+    max-height: 25vh;
+    overflow-y: scroll;
+    box-shadow: cyan 0 0 10px 3px;
+    border-radius: 0px 0px 20px 20px;
+    margin: 0px 6px;
+    padding: 15px 0px;
+}

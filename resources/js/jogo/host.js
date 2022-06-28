@@ -43,8 +43,8 @@ window.Echo.channel('jogo-jogada-' + jogoId)
             inputIdJogo.value = data.jogoId
             inputCartaBrancaGanhadora.value = data.cartas.id_carta_branca
             inputJogadorGanhador.value = JSON.stringify(jogadorGanhador)
-            buttonFinalizarRodada.style.display = 'block';
-        } else if (data.tp_jogada == 4){
+            buttonFinalizarRodada.parentElement.hidden = false
+        } else if (data.tp_jogada == 4) {
             if (inputCartaBrancaDescartada.value == '') {
                 inputCartaBrancaDescartada.value = JSON.stringify([])
             }
@@ -80,19 +80,21 @@ if (estadoJogo == 0) {
         }
     }
 }
-buttonFinalizarRodada.onclick = () => {
-    options = {
-        method: 'POST',
-        url: finishRodada,
-        data: {
-            id_jogo: inputIdJogo.value,
-            cartas_brancas_descartadas: inputCartaBrancaDescartada.value,
-            carta_branca_ganhadora: inputCartaBrancaGanhadora.value,
-            carta_preta_descartada: inputCartaPretaDescartada.value,
-            jogador_ganhador: inputJogadorGanhador.value,
-            my_id: myId
+if (buttonFinalizarRodada != null) {
+    buttonFinalizarRodada.onclick = () => {
+        options = {
+            method: 'POST',
+            url: finishRodada,
+            data: {
+                id_jogo: inputIdJogo.value,
+                cartas_brancas_descartadas: inputCartaBrancaDescartada.value,
+                carta_branca_ganhadora: inputCartaBrancaGanhadora.value,
+                carta_preta_descartada: inputCartaPretaDescartada.value,
+                jogador_ganhador: inputJogadorGanhador.value,
+                my_id: myId
+            }
         }
-    }
-    axios(options)
+        axios(options)
 
+    }
 }

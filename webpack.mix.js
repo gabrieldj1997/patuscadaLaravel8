@@ -23,6 +23,11 @@ mix.js('resources/js/app.js', 'public/js')
     .styles(['resources/css/app.css'
         , 'resources/css/chat.css'],
         'public/css/chat.css')
+    .styles(['resources/css/app.css'
+        , 'resources/css/jogo.css'],
+        'public/css/jogo.css')
+    .styles(['resources/css/font.css'],
+        'public/css/fonts.css')
     .sourceMaps()
     .version()
     .scripts('resources/bootstrap/dist/js/bootstrap.bundle.js', 'public/js/bootstrap.js')

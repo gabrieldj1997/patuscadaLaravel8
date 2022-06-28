@@ -2,11 +2,13 @@
     "/js/app.js": "/js/app.js?id=ecfe1792b55d7d373d72ca1be7bc2c01",
     "/js/chat.js": "/js/chat.js?id=9acf8784da09a9de3279074b80821b18",
     "/js/jogo.js": "/js/jogo.js?id=d91a1946299acb44e85abed9d2b28b3a",
-    "/js/jogo/host.js": "/js/jogo/host.js?id=6dbf86fbea05a99a25a491a078c8bea1",
-    "/js/jogo/client.js": "/js/jogo/client.js?id=3b2bfea7054f147408ad41e97b7b55c2",
+    "/js/jogo/host.js": "/js/jogo/host.js?id=b8ed9ff2bc328a7485e18838755d2b84",
+    "/js/jogo/client.js": "/js/jogo/client.js?id=e762acbfdcaf3750ae1188e75f85bcf5",
     "/css/app.css": "/css/app.css?id=cd4bfe91adf6727ea031e4ec711e59d8",
     "/css/bootstrap.css": "/css/bootstrap.css?id=2318fd6a661fcc2f3c7a5d794e387595",
-    "/css/style.css": "/css/style.css?id=68c80e6c18b0c6a08398d70f2043c666",
-    "/css/chat.css": "/css/chat.css?id=d87b5a5181f137b6a90e44c895e7961a",
+    "/css/style.css": "/css/style.css?id=ac9977f8ed6a451651a4739dd9d78203",
+    "/css/chat.css": "/css/chat.css?id=307ab568ee1dd7fa58499ee406e5cbac",
+    "/css/jogo.css": "/css/jogo.css?id=b5956a8ad67e61e2dd3feb3988b2806c",
+    "/css/fonts.css": "/css/fonts.css?id=f0b40fbd7e48527676d0069e5659291b",
     "/js/bootstrap.js": "/js/bootstrap.js?id=d38ecc48a4303501a23f4b3518c189ce"
 }
