@@ -107,14 +107,14 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-6" style="padding: 0px 0px 0px 15px;">
                         @include('jogo.cartasPretas')
 
                         @include('jogo.cartasBrancasEscolhidas')
 
                         @include('jogo.pontuacao')
                     </div>
-                    <div class="col-6">
+                    <div class="col-6" style="padding: 0px 15px 0px 0px;">
                         @include('jogo.cartasBrancas')
                     </div>
                 </div>
