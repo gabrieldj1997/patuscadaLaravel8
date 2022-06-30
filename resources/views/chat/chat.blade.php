@@ -16,8 +16,8 @@
 
 <body>
     <div class="container chat-container">
-        <div class="row col-md">
-            <div class="chat-header col-12">
+        <div class="row">
+            <div class="chat-header col-12" style="color: rgb(255, 255, 255,0.5); padding: 15px">
                 <div class="row">
                     <div class="title-logo col-md-3">
                         <h1>Chat</h1>
@@ -29,14 +29,14 @@
                 </div>
             </div>
             <div class="chat-section col-12">
-                <div id="users-online" class="col-2">
+                <div id="users-online" class="col-2" style="color: rgb(255, 255, 255,0.5);">
                     <h4>Usuarios online</h4>
-                    <ul id="users-online-list"></ul>
+                    <ul id="users-online-list" style="list-style: none; padding: 0px;"></ul>
                 </div>
                 <div id="messages" class="col-10"></div>
             </div>
-            <div class="chat-footer col-12">
-                <div class="d-flex justify-content-center">
+            <div class="chat-footer col-12 row justify-content-end">
+                <div class="d-flex col-8">
                     <form id="message_form">
                         <div class="d-flex justify-content-between">
                             <input type="text" name="message" id="message_input" placeholder="Your message">

@@ -119,12 +119,20 @@ body{
     align-self: start;
 }
 .messages{
+    color: whitesmoke;
     border-radius: 5px;
-    border: black 1px solid;
+    border: #071974 2px solid;
     padding: 10px;
     margin: 10px;
     width: auto;
+    background: rgb(2 17 32 / 81%);
 }
 .message-text{
     overflow-wrap: anywhere;
+}
+#message_input{
+    background: rgb(50,50,50);
+    color: white;
+    border-radius: 20px 0px 0px 20px;
+    border: rgb(10,10,100,0.7) 3px solid;
 }
