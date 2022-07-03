@@ -20,7 +20,8 @@ class JogoController extends Controller
     {
         $jogo = Jogo::find($id);
         $jogadores = JogadorCartas::where('id_jogo', $id)->get();
-        return view('jogo.partida', ['jogo' => $jogo, 'jogadores' => $jogadores]);
+        $rodada = Rodada::where('id_jogo', $id)->get();
+        return view('jogo.partida', ['jogo' => $jogo, 'jogadores' => $jogadores, 'rodada' => $rodada]);
     }
 
     public function CreatePartida(Request $req)
@@ -28,6 +29,14 @@ class JogoController extends Controller
         $jogo = new Jogo();
         $jogo->codigo = $req->input('codigo_jogo');
         $jogo->id_jogador_criador = Auth::user()->id;
+
+        $rodada = new Rodada();
+        $rodada->id_jogo = $jogo->id;
+        $rodada->codigo_jogo = $jogo->codigo;
+        $rodada->rodada_atual = 0;
+        $rodada->id_estado_rodada = 0;
+        $rodada->cartas_brancas_escolhidas = json_encode(array());
+        $rodada->save();
 
         $cartas_brancas = CartasBrancas::all('id');
         $cartas_brancas = json_decode($cartas_brancas->map(function ($item) {
@@ -49,9 +58,7 @@ class JogoController extends Controller
     public function StartPartida(Request $req)
     {
         $jogo = Jogo::find($req->input('id_jogo'));
-        $rodada = new Rodada();
-        $rodada->id_jogo = $jogo->id;
-        $rodada->codigo_jogo = $jogo->codigo;
+        $rodada = Rodada::where('id_jogo', $jogo->id)->get();
         $rodada->rodada_atual = 1;
         $rodada->id_estado_rodada = 1;
         $rodada->cartas_brancas_escolhidas = json_encode(array());
