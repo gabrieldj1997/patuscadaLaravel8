@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\CartasBrancas;
 use App\Models\CartasPretas;
 use App\Models\JogadorCartas;
+use App\Models\Rodada;
 use App\Events\MessageJogo;
 use App\Events\JogadasJogo;
 // use App\Events\CartasJogo;
@@ -48,6 +49,13 @@ class JogoController extends Controller
     public function StartPartida(Request $req)
     {
         $jogo = Jogo::find($req->input('id_jogo'));
+        $rodada = new Rodada();
+        $rodada->id_jogo = $jogo->id;
+        $rodada->codigo_jogo = $jogo->codigo;
+        $rodada->rodada_atual = 1;
+        $rodada->id_estado_rodada = 1;
+        $rodada->cartas_brancas_escolhidas = json_encode(array());
+        $rodada->save();
         // event(
         //     new MessageJogo($jogo->id, ['tp_message' => [1, 1], 'message' => 'Iniciando partida...'])
         // );
@@ -68,9 +76,10 @@ class JogoController extends Controller
         }
 
         $jogo->save();
-        event(
-            new MessageJogo($jogo->id, ['tp_message' => [1, 2], 'message' => 'Partida iniciada'])
-        );
+
+        // event(
+        //     new MessageJogo($jogo->id, ['tp_message' => [1, 2], 'message' => 'Partida iniciada'])
+        // );
         
         $this->ProximaRodada($req);
     }
@@ -197,6 +206,14 @@ class JogoController extends Controller
         $jogo->cartas_pretas_jogo = json_encode(array());
         $jogo->save();
 
+        $rodada = Rodada::where('id_jogo', $jogo->id)->first();
+        $rodada->rodada_atual = $rodada->rodada_atual + 1;
+        $rodada->id_estado_rodada = 1;
+        $rodada->carta_preta_escolhida = null;
+        $rodada->cartas_brancas_escolhidas = json_encode(array());
+        $rodada->carta_branca_vencedora = null;
+        $rodada->save();
+
         // event(
         //     new MessageJogo($jogo->id, ['tp_message' => [3, 4], 'message' => 'Rodada Finalizada'])
         // );
@@ -239,7 +256,10 @@ class JogoController extends Controller
     public function ChooseCartaPreta(Request $req, $jogoId)
     {
         $carta_preta = CartasPretas::find($req->input('id_carta_preta'));
-
+        $rodada = Rodada::where('id_jogo', $jogoId)->first();
+        $rodada->carta_preta_escolhida = $req->input('id_carta_preta');
+        $rodada->id_estado_rodada = 2;
+        $rodada->save();
         event(
             new JogadasJogo(
                 $jogoId,
@@ -253,7 +273,18 @@ class JogoController extends Controller
     public function ChooseCartaBranca(Request $req, $jogoId)
     {
         $carta_branca = CartasBrancas::find($req->input('id_carta_branca'));
-
+        $jogadores = JogadorCartas::where('id_jogo', $jogoId)->get('id_jogador');
+        $rodada = Rodada::where('id_jogo', $jogoId)->first();
+        $cartas_brancas_escolhidas = json_decode($rodada->cartas_brancas_escolhidas);
+        $ind_jogador = array_search($req->input('my_id'), array_column($cartas_brancas_escolhidas, 'id_jogador'));
+        if(!$ind_jogador){
+            array_push($cartas_brancas_escolhidas, ["id_jogador" => $req->input('my_id'), "carta_branca" => $carta_branca->id]);
+        }
+        if(count($cartas_brancas_escolhidas) == count(json_decode($jogadores)) - 1){
+            $rodada->id_estado_rodada = 3;
+        }
+        $rodada->cartas_brancas_escolhidas = json_encode($cartas_brancas_escolhidas);
+        $rodada->save();
         event(
             new JogadasJogo(
                 $jogoId,
@@ -268,7 +299,10 @@ class JogoController extends Controller
     {
         $carta_branca = CartasBrancas::find($req->input('id_carta_branca'));
         $carta_preta = CartasPretas::find($req->input('id_carta_preta'));
-
+        $rodada = Rodada::where('id_jogo', $jogoId)->first();
+        $rodada->carta_branca_vencedora = $carta_branca->id;
+        $rodada->id_estado_rodada = 4;
+        $rodada->save();
         event(
             new JogadasJogo(
                 $jogoId,
