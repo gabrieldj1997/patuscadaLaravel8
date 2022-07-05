@@ -16,6 +16,7 @@ class Rodada extends Model
         'id_estado_rodada',
         'carta_preta_escolhida',
         'cartas_brancas_escolhidas',
+        'jogador_vencedor',
         'carta_branca_vencedora',
     ];
 }

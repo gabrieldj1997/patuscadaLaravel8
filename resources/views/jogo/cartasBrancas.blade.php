@@ -1,5 +1,5 @@
 <div id="box_cartas_brancas" class="row justify-element-center">
-    @if (json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador == Auth::user()->id)
+    @if (json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador == Auth::user()->id && $rodada->id_estado_rodada == 1)
         <div class="col-md-6" style="text-align: center; padding: 20px">
             <div id="div_button_leitor">
                 <button type="button" class="btn btn-primary" id="button_trocar_cartas">Trocar todas cartas

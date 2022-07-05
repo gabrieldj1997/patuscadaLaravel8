@@ -24,7 +24,6 @@ const cartas_pretas_leitor = document.querySelectorAll('.carta_preta_leitor');
 const button_trocar_cartas = document.querySelector('#button_trocar_cartas');
 const button_mostrar_cartas_brancas = document.querySelector('#button_mostrar_cartas_brancas');
 
-
 window.Echo.channel('jogo-message-' + jogoId)
     .listen('.message', (data) => {
         MessageTrigger(data)
@@ -139,19 +138,16 @@ if (button_mostrar_cartas_brancas != null) {
 function MessageTrigger(message) {
     //primeira classe
     //1 = Partida; 2 = cartas; 3= rodada; 4 = jogador;
-    debugger
     switch (message.data.tp_message[0]) {
         case 1:
             if (message.data.tp_message[1] == 2) {
                 location.reload();
             } else if (message.data.tp_message[1] == 3) {
-                document.querySelector('#mensagens').innerHTML = `<h1>Jogo finalizado! ${message.data.message}</h1>`
+                RodadaEstado(4);
             }
             break;
         case 2:
-            if (message.data.tp_message[1] == 1) {
-                //loading com mensagem "Embaralhando e distirbuindo as cartas..."
-            } else {
+            if (!(message.data.tp_message[1] == 1)){
                 location.reload();
             }
             break;
@@ -279,4 +275,42 @@ async function ConsultarUsuario(id) {
     var user = await axios(option);
     user = user.data
     return user;
+}
+
+function RodadaEstado(id) {
+    switch (id) {
+        case 1:
+            Estado1();
+            break;
+        case 2:
+            Estado2();
+            break;
+        case 3:
+            Estado3();
+            break;
+        case 4:
+            Estado4();
+            break;
+    }
+}
+
+function Estado1() {
+    //vincular função a cartas pretas do leitor
+    //vincular função de alerta nas cartas brancas jogadores
+}
+
+function Estado2() {
+    //vincular função de escolha nas cartas brancas jogadores
+    //mensagem de escolha de carta branca
+    //retirar cartas pretas não escolhidas leitor
+    //vincular função de alerta na carta preta do leitor
+}
+
+function Estado3() {
+    //vincular função de alerta nas cartas brancas leitor
+    
+}
+
+function Estado4() {
+
 }

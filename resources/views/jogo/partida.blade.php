@@ -28,7 +28,9 @@
                 var jogadorCriador = '<?= $jogo->id_jogador_criador ?>';
                 var jogadores = '<?= $jogadores ?>';
                 jogadores = JSON.parse(jogadores);
-                jogadores = jogadores.map(i => { return i.id})
+                jogadores = jogadores.map(i => {
+                    return i.id
+                })
             </script>
         @endif
     @endif
@@ -40,16 +42,16 @@
         @include('layouts.header', ['jogo', $jogo])
         @if (isset($jogo))
 
-            <!--Jogo estado aguardando inicio-->
+            {{-- Jogo estado aguardando inicio --}}
             @if ($jogo->estado_jogo == 0)
                 @include('jogo.salaEspera')
 
-
-                <!--Jogo estado iniciado-->
+                {{-- Jogo estado iniciado --}}
             @else
-                <div class="row">
-                    <div class="col-12">
-                        <div id="mensagens">
+                <div id="mensagens">
+                    @switch($rodada->id_estado_rodada)
+                        {{-- Leitor escolhendo carta preta --}}
+                        @case(1)
                             @if (json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador == Auth::user()->id)
                                 <p>Escolha uma carta preta</p>
                             @else
@@ -57,8 +59,46 @@
                                     {{ App\Models\User::find(json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador)->nickname }}
                                     escolher uma carta preta</p>
                             @endif
-                        </div>
-                    </div>
+                        @break
+
+                        {{-- Jogadores escolhendo cartas brancas --}}
+                        @case(2)
+                            @if (json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador == Auth::user()->id)
+                                <p>
+                                    Aguarde jogadores escolherem as cartas brancas:
+                                    @foreach (json_decode($rodada->cartas_brancas_escolhidas) as $carta_branca)
+                                        {{ App\Models\User::find($carta_branca->id_jogador)->nickname }};
+                                    @endforeach
+                                </p>
+                            @else
+                                @if (array_search(Auth::user()->id, array_column(json_decode($rodada->cartas_brancas_escolhidas), 'id_jogador')) === false)
+                                    <p>Escolha uma carta branca.</p>
+                                @else
+                                    Aguarde jogadores escolherem as cartas brancas:
+                                    @foreach (json_decode($rodada->cartas_brancas_escolhidas) as $carta_branca)
+                                        {{ App\Models\User::find($carta_branca->id_jogador)->nickname }};
+                                    @endforeach
+                                @endif
+                            @endif
+                        @break
+
+                        {{-- Leitor escolhendo carta branca vencedora --}}
+                        @case(3)
+                            @if (json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador == Auth::user()->id)
+                                <p>Escolha a carta branca vencedora.</p>
+                            @else
+                                <p>Aguarde o
+                                    {{ App\Models\User::find(json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador)->nickname }}
+                                    escolher a carta branca vencedora</p>
+                            @endif
+                        @break
+
+                        {{-- Rodada finalizada --}}
+                        @case(4)
+                            <p>{{ App\Models\User::find($rodada->jogador_vencedor)->nickname }} ganhou esta rodada.</p>
+                        @break
+
+                    @endswitch
                 </div>
                 <div class="row">
                     <div class="col-6" style="padding: 0px 0px 0px 15px;">

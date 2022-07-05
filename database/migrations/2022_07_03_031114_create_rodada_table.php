@@ -21,6 +21,7 @@ class CreateRodadaTable extends Migration
             $table->integer('id_estado_rodada');
             $table->integer('carta_preta_escolhida')->nullable();
             $table->string('cartas_brancas_escolhidas')->nullable();
+            $table->integer('jogador_vencedor')->nullable();
             $table->integer('carta_branca_vencedora')->nullable();
             $table->timestamps();
         });

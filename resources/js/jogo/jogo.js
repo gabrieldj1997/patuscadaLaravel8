@@ -8,7 +8,6 @@ require('../bootstrap');
 const users_list = document.querySelector('#list_Jogadores');
 
 
-
 window.Echo.join('App.jogo-' + jogoId)
     .joining((user) => {
         let element = document.getElementsByClassName(`jogador-${user.nickname}`);
