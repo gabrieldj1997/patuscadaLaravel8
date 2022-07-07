@@ -313,7 +313,6 @@ class JogoController extends Controller
     public function ChooseJogadorVencedor(Request $req, $jogoId)
     {
         $carta_branca = CartasBrancas::find($req->input('id_carta_branca'));
-        $carta_preta = CartasPretas::find($req->input('id_carta_preta'));
         $rodada = Rodada::where('id_jogo', $jogoId)->first();
         $rodada->jogador_vencedor = $req->input('id_jogador_ganhador');
         $rodada->carta_branca_vencedora = $carta_branca->id;
@@ -324,7 +323,7 @@ class JogoController extends Controller
                 $jogoId,
                 $req->input('my_id'),
                 3,
-                ["id_jogador" => $req->input('id_jogador_ganhador'), "id_carta_preta" => $carta_preta->id, "id_carta_branca" => $carta_branca->id]
+                ["id_jogador" => $req->input('id_jogador_ganhador'), "id_carta_preta" => $rodada->carta_preta_escolhida, "id_carta_branca" => $carta_branca->id]
             )
         );
     }

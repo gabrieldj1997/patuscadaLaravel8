@@ -173,7 +173,6 @@ async function JogadaTrigger(message) {
                 document.querySelector('#mensagens').innerHTML = `<p>Escolha a carta branca vencedora.</p>`
                 botao_cartas_brancas_leitor.forEach(carta => {
                     carta.addEventListener('click', (event) => {
-                        let idCartaPreta = document.querySelector('.carta_preta_leitor').attributes.idcartapreta.value
                         let idCartaBranca = carta.attributes.idCartaBranca.value;
                         let jogadorGanhador = carta.attributes.idjogador.value;
                         let userConfirm = confirm('Escolher carta ' + idCartaBranca + ' como vencedora?');
@@ -182,7 +181,6 @@ async function JogadaTrigger(message) {
                                 method: 'POST',
                                 url: chosseVencedor,
                                 data: {
-                                    id_carta_preta: idCartaPreta,
                                     id_carta_branca: idCartaBranca,
                                     my_id: myId,
                                     id_jogador_ganhador: jogadorGanhador
