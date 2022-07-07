@@ -14,44 +14,11 @@ const finishRodada = window.location.origin + '/api/jogoApi/next';
 const jogadores_list = document.querySelector('#list_Jogadores');
 const buttonFinalizarRodada = document.querySelector('#buttonFinalizarRodada');
 const inputIdJogo = document.querySelector('#inputIdJogo');
-const inputJogadorGanhador = document.querySelector('#inputJogadorGanhador');
-const inputCartaBrancaDescartada = document.querySelector('#inputCartaBrancaDescartada');
-const inputCartaPretaDescartada = document.querySelector('#inputCartaPretaDescartada');
-const inputCartaBrancaGanhadora = document.querySelector('#inputCartaBrancaGanhadora');
 
 window.Echo.channel('jogo-jogada-' + jogoId)
     .listen('.jogadas', (data) => {
-        if (data.tp_jogada == 1) {
-            inputCartaPretaDescartada.value = data.cartas.id
-        } else if (data.tp_jogada == 2) {
-            if (inputCartaBrancaDescartada.value == '') {
-                inputCartaBrancaDescartada.value = JSON.stringify([])
-            }
-            let val = JSON.parse(inputCartaBrancaDescartada.value)
-            if (val.findIndex((item) => { return item.id === data.jogadorId }) == -1) {
-                val.push({ id: data.jogadorId, cartas: [data.cartas.id] })
-            } else {
-                val[val.findIndex((item) => { return item.id === data.jogadorId })].cartas.push(data.cartas.id)
-            }
-            inputCartaBrancaDescartada.value = JSON.stringify(val)
-        } else if (data.tp_jogada == 3) {
-            let jogadorGanhador = {
-                id_jogador: data.cartas.id_jogador,
-                id_carta_preta: data.cartas.id_carta_preta,
-                id_carta_branca: data.cartas.id_carta_branca
-            }
-            inputIdJogo.value = data.jogoId
-            inputCartaBrancaGanhadora.value = data.cartas.id_carta_branca
-            inputJogadorGanhador.value = JSON.stringify(jogadorGanhador)
+        if (data.tp_jogada == 3) {
             buttonFinalizarRodada.parentElement.hidden = false
-        } else if (data.tp_jogada == 4) {
-            if (inputCartaBrancaDescartada.value == '') {
-                inputCartaBrancaDescartada.value = JSON.stringify([])
-            }
-            let val = JSON.parse(inputCartaBrancaDescartada.value)
-            val.push({ id: data.jogadorId, cartas: [data.cartas.id] })
-            val[val.findIndex((item) => { return item.id === data.jogadorId })].cartas = data.cartas
-            inputCartaBrancaDescartada.value = JSON.stringify(val)
         }
     })
 
@@ -87,10 +54,6 @@ if (buttonFinalizarRodada != null) {
             url: finishRodada,
             data: {
                 id_jogo: inputIdJogo.value,
-                cartas_brancas_descartadas: inputCartaBrancaDescartada.value,
-                carta_branca_ganhadora: inputCartaBrancaGanhadora.value,
-                carta_preta_descartada: inputCartaPretaDescartada.value,
-                jogador_ganhador: inputJogadorGanhador.value,
                 my_id: myId
             }
         }

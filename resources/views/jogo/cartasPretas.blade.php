@@ -21,7 +21,7 @@
             @endforeach
         @else
             <div class="col-md-6">
-                <div class="carta_preta card bg-dark text-white mb-3" style="max-width: 18rem;">
+                <div class="carta_preta_leitor card bg-dark text-white mb-3" style="max-width: 18rem;">
 
                     <div class="card-header">
                         Aguarde
@@ -36,7 +36,7 @@
         @endif
     @else
         <div class="col-md-6">
-            <div class="carta_preta card bg-dark text-white mb-3" style="max-width: 18rem;">
+            <div class="carta_preta card bg-dark text-white mb-3" style="max-width: 18rem;" idCartaPreta="{{$rodada->carta_preta_escolhida}}">
                 <div class="card-header">
                     Patuscada
                     carta_id = {{ $rodada->carta_preta_escolhida }}

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('id_jogo');
             $table->integer('id_jogador');
-            $table->string('pontuacao');
+            $table->string('pontuacao',2000);
             $table->string('cartas');
             $table->string('updated_at');
             $table->string('created_at');

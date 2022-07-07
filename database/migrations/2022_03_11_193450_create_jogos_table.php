@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('codigo')->unique();
             $table->integer('id_jogador_criador');
             $table->string('jogadores')->nullable();
-            $table->string('cartas_brancas_monte');
-            $table->string('cartas_pretas_monte');
+            $table->string('cartas_brancas_monte',2000);
+            $table->string('cartas_pretas_monte', 2000);
             $table->string('cartas_pretas_jogo');
             $table->integer('rodada_jogo')->default(0);
             $table->integer('estado_jogo')->default(0);

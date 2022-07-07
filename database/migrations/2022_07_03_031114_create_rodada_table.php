@@ -20,9 +20,11 @@ class CreateRodadaTable extends Migration
             $table->integer('rodada_atual');
             $table->integer('id_estado_rodada');
             $table->integer('carta_preta_escolhida')->nullable();
-            $table->string('cartas_brancas_escolhidas')->nullable();
+            $table->string('cartas_brancas_escolhidas',1000)->nullable();
             $table->integer('jogador_vencedor')->nullable();
             $table->integer('carta_branca_vencedora')->nullable();
+            $table->integer('id_leitor')->nullable();
+            $table->boolean('leitor_trocou_cartas');
             $table->timestamps();
         });
     }

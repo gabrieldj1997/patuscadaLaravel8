@@ -18,5 +18,7 @@ class Rodada extends Model
         'cartas_brancas_escolhidas',
         'jogador_vencedor',
         'carta_branca_vencedora',
+        'id_leitor',
+        'leitor_trocou_cartas'
     ];
 }
