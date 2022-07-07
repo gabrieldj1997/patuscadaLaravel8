@@ -20,6 +20,7 @@
             var myId = '<?= Auth::user()->id ?>';
             var estadoJogo = `<?= $jogo->estado_jogo ?>`;
             var jogoId = `<?= $jogo->id ?>`;
+            var rodada = `<?= $rodada->id_estado_rodada ?>`;
         </script>
         @if ($jogo->estado_jogo != 0)
             <script>
@@ -28,7 +29,9 @@
                 var jogadorCriador = '<?= $jogo->id_jogador_criador ?>';
                 var jogadores = '<?= $jogadores ?>';
                 jogadores = JSON.parse(jogadores);
-                jogadores = jogadores.map(i => { return i.id})
+                jogadores = jogadores.map(i => {
+                    return i.id
+                })
             </script>
         @endif
     @endif
@@ -40,25 +43,66 @@
         @include('layouts.header', ['jogo', $jogo])
         @if (isset($jogo))
 
-            <!--Jogo estado aguardando inicio-->
+            {{-- Jogo estado aguardando inicio --}}
             @if ($jogo->estado_jogo == 0)
                 @include('jogo.salaEspera')
 
-
-                <!--Jogo estado iniciado-->
+                {{-- Jogo estado iniciado --}}
             @else
-                <div class="row">
-                    <div class="col-12">
-                        <div id="mensagens">
+                <div id="mensagens">
+                    @switch($rodada->id_estado_rodada)
+                        {{-- Leitor escolhendo carta preta --}}
+                        @case(1)
                             @if (json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador == Auth::user()->id)
-                                <p>Escolha uma carta preta</p>
+                                <p>
+                                    Escolha uma carta preta
+                                    @if ($rodada->leitor_trocou_cartas == true)
+                                    Leitor trocou as cartas
+                                    @endif
+                                </p>
                             @else
                                 <p>Aguarde o
                                     {{ App\Models\User::find(json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador)->nickname }}
-                                    escolher uma carta preta</p>
+                                    escolher uma carta preta
+                                    @if ($rodada->leitor_trocou_cartas == true)
+                                    Leitor trocou as cartas
+                                    @endif
+                                </p>
                             @endif
-                        </div>
-                    </div>
+                        @break
+
+                        {{-- Jogadores escolhendo cartas brancas --}}
+                        @case(2)
+                            @if (json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador == Auth::user()->id)
+                                <p>
+                                    Aguarde jogadores escolherem as cartas brancas.
+                                </p>
+                            @else
+                                @if (array_search(Auth::user()->id, array_column(json_decode($rodada->cartas_brancas_escolhidas), 'id_jogador')) === false)
+                                    <p>Escolha uma carta branca.</p>
+                                @else
+                                    Aguarde os outros jogadores escolherem as cartas brancas.
+                                @endif
+                            @endif
+                        @break
+
+                        {{-- Leitor escolhendo carta branca vencedora --}}
+                        @case(3)
+                            @if (json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador == Auth::user()->id)
+                                <p>Escolha a carta branca vencedora.</p>
+                            @else
+                                <p>Aguarde o
+                                    {{ App\Models\User::find(json_decode($jogadores)[($jogo->rodada_jogo - 1) % count(json_decode($jogadores))]->id_jogador)->nickname }}
+                                    escolher a carta branca vencedora</p>
+                            @endif
+                        @break
+
+                        {{-- Rodada finalizada --}}
+                        @case(4)
+                            <p>Jogador {{ App\Models\User::find($rodada->jogador_vencedor)->nickname }} venceu a rodada!</p>
+                        @break
+
+                    @endswitch
                 </div>
                 <div class="row">
                     <div class="col-6" style="padding: 0px 0px 0px 15px;">
@@ -80,11 +124,7 @@
         @endif
 
         @if (Auth::user()->id == $jogo->id_jogador_criador)
-            <input id="inputIdJogo" type="text" style="display: none;" />
-            <input id="inputJogadorGanhador" type="text" style="display: none;" />
-            <input id="inputCartaBrancaDescartada" type="text" style="display: none;" />
-            <input id="inputCartaPretaDescartada" type="text" style="display: none;" />
-            <input id="inputCartaBrancaGanhadora" type="text" style="display: none;" />
+            <input id="inputIdJogo" type="text"  value="{{$jogo->id}}" hidden/>
         @endif
 
     </div>

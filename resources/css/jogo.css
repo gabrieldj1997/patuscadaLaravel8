@@ -21,7 +21,7 @@
 #mensagens {
     color: rgb(255, 255, 255, 0.8);
     text-align: center;
-    padding: 20px;
+    padding: 0px 0px 20px 0px;
 }
 
 #carta_preta_escolhida {
@@ -46,18 +46,30 @@
     border: black 2px solid;
     border-radius: 20px;
 }
+.carta_branca .card-back {
+    display: none;
+}
 
-.carta_branca[cartaVirada] {
+.carta_branca[cartavirada] {
     color: white;
     font-size: 75%;
     height: 90%;
     border: black 2px solid;
     border-radius: 20px;
 }
-.carta_branca[cartaVirada] a {
+.carta_branca[cartavirada] a {
     color: rgba(0, 0, 0, 0.03);
 }
-
+.carta_branca[cartavirada] .card-body {
+    display: none;
+}
+.carta_branca[cartavirada] .card-back {
+    display: block;
+    color: black;
+    padding: 1.25rem;
+    font-weight: bolder;
+    text-align: center;
+}
 .carta_branca_leitor {
     font-size: 75%;
     height: 90%;
