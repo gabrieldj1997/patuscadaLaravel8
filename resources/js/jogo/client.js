@@ -169,7 +169,7 @@ async function JogadaTrigger(message) {
             box_cartas_brancas_leitor.innerHTML += carta;
             let botao_cartas_brancas_leitor = document.querySelectorAll('.button_carta_branca_leitor');
             if (botao_cartas_brancas_leitor.length == jogadores.length - 1) {
-                window.navigator.vibrate(200)
+                window.navigator.vibrate(600)
                 EmbaralharCartasBrancas();
                 document.querySelector('#mensagens').innerHTML = `<p>Escolha a carta branca vencedora.</p>`
                 botao_cartas_brancas_leitor.forEach(carta => {
@@ -198,7 +198,7 @@ async function JogadaTrigger(message) {
         }
     } else {//Jogador
         if (message.tp_jogada == 1) {
-            window.navigator.vibrate(200)
+            window.navigator.vibrate(600)
             botao_cartas_brancas.forEach(botao => {
                 botao.attributes.removeNamedItem('disabled');
             })
