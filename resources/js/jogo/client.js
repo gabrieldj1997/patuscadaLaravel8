@@ -169,6 +169,7 @@ async function JogadaTrigger(message) {
             box_cartas_brancas_leitor.innerHTML += carta;
             let botao_cartas_brancas_leitor = document.querySelectorAll('.button_carta_branca_leitor');
             if (botao_cartas_brancas_leitor.length == jogadores.length - 1) {
+                window.navigator.vibrate(200)
                 EmbaralharCartasBrancas();
                 document.querySelector('#mensagens').innerHTML = `<p>Escolha a carta branca vencedora.</p>`
                 botao_cartas_brancas_leitor.forEach(carta => {
@@ -197,6 +198,7 @@ async function JogadaTrigger(message) {
         }
     } else {//Jogador
         if (message.tp_jogada == 1) {
+            window.navigator.vibrate(200)
             botao_cartas_brancas.forEach(botao => {
                 botao.attributes.removeNamedItem('disabled');
             })
@@ -212,6 +214,7 @@ async function JogadaTrigger(message) {
             box_cartas_brancas_leitor.innerHTML += carta;
             let botao_cartas_brancas_leitor = document.querySelectorAll('#box_cartas_brancas_escolhidas .carta_branca');
             if (botao_cartas_brancas_leitor.length == jogadores.length - 1) {
+                window.navigator.vibrate(200)
                 EmbaralharCartasBrancas();
                 document.querySelector('#mensagens').innerHTML = `<p>Aguarde o ${leitor.nickname} escolher a carta branca vencedora</p>`
                 RetirarBotaoCartasBrancasLeitor()
@@ -221,6 +224,7 @@ async function JogadaTrigger(message) {
     if (message.tp_jogada == 1) {
         RetirarBotaoCartasPreta()
     } else if (message.tp_jogada == 3) {
+        window.navigator.vibrate(200)
         user = await ConsultarUsuario(message.cartas.id_jogador)
         document.querySelector('#mensagens').innerHTML = `<p>Jogador ${user.nickname} venceu a rodada!</p>`
         var carta = await GeradorCarta(message.cartas.id_carta_branca, 'branca', message.cartas.id_jogador);
@@ -233,6 +237,7 @@ async function JogadaTrigger(message) {
             item.hidden = false
         })
     } else if (message.tp_jogada == 4) {
+        window.navigator.vibrate(200)
         user = await ConsultarUsuario(message.cartas.id_jogador)
         document.querySelector('#mensagens').children[0].append(`   Leitor trocou suas cartas.`)
     }
