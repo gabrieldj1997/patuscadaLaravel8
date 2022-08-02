@@ -120,14 +120,13 @@ class JogoController extends Controller
         $jogo->cartas_brancas_monte = json_encode($cartas_brancas_monte);
 
         $cartas_pretas_monte = json_decode($jogo->cartas_pretas_monte);
-        $cartas_pretas_jogo = json_decode($jogo->cartas_pretas_jogo);
+        $cartas_pretas_jogo = array();
 
         for ($i = count($cartas_pretas_jogo); $i < (3 < count($cartas_pretas_monte) ? 3 : count($cartas_pretas_monte)); $i++) {
-            $carta = $cartas_pretas_monte[(rand(0, count($cartas_pretas_monte) - 1))];
+            $carta = array_splice($cartas_pretas_monte, rand(0, count($cartas_pretas_monte) - 1), 1);
             array_push($cartas_pretas_jogo, $carta);
         }
 
-        $jogo->cartas_pretas_monte = json_encode($cartas_pretas_monte);
         $jogo->cartas_pretas_jogo = json_encode($cartas_pretas_jogo);
 
         // for ($i = 0; $i < count($jogadores); $i++) {

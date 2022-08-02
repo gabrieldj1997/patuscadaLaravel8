@@ -14,14 +14,14 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <div>
                 <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('index') }}">GBLTech</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="modal"
+                        data-target="#modal-game-rules">Regras</a>
+                    </li>
                     @if (Auth::check())
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('index') }}">GBLTech</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="modal"
-                            data-target="#modal-game-rules">Regras</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('chat') }}">chat</a>
                         </li>
@@ -69,6 +69,7 @@
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#">version 2.5.0</a>
                     </li>
+                    
                 </ul>
             </div>
         </div>
@@ -89,33 +90,32 @@
         </ul>
     @endif
 </nav>
-@if (!isset($jogo))
-    @if (Auth::check())
-    <div id="modal-game-rules" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-dark modal-style">
-                    <h5 class="modal-title">Regras</h5>
-                    <button type="button" class="btn btn-danger" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body bg-dark modal-style">
-                    <p>O jogo consiste em cartas de perguntas e respostas, cartas pretas são perguntas e cartas brancas respostas;</p>
-                    <p>Para começar o jogo será distribuídas 5 cartas brancas para cada jogador, assim está pronto para começar a primeira rodada.</p>
-                    <p>Para cada rodada será escolhido um jogador "Leitor" que lhe será apresentada 3 cartas pretas aleatórias, o Leitor deverá escolher apenas uma.</p>
-                    <p>A carta escolhida pelo Leitor será apresentada aos outros jogadores, as outras serão devolvidas ao monte.</p>
-                    <p>Após a carta preta ser revelada, todos os jogadores escolherão uma carta branca das 5 que ele tem. As cartas são viradas de face para baixo e reveladas apenas quando todos tiverem escolhido suas respectivas cartas.</p>
-                    <p>Logo após de todos os jogadores terem escolhido uma carta branca, o Leitor então poderá ler as respostas e escolher conforme seu critério a carta vencedora.</p>
-                    <p>O jogador que escolheu a carta branca vencedora será o vencedor da rodada, podendo assim finalizar a rodada e começar uma nova, assim como um Leitor novo.</p>
-                </div>
-                <div class="modal-footer bg-dark modal-style">
-                    <p>@GBLTech produção</p>
-                </div>
+<div id="modal-game-rules" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark modal-style">
+                <h5 class="modal-title">Regras</h5>
+                <button type="button" class="btn btn-danger" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body bg-dark modal-style">
+                <p>O jogo consiste em cartas de perguntas e respostas, cartas pretas são perguntas e cartas brancas respostas;</p>
+                <p>Para começar o jogo será distribuídas 5 cartas brancas para cada jogador, assim está pronto para começar a primeira rodada.</p>
+                <p>Para cada rodada será escolhido um jogador "Leitor" que lhe será apresentada 3 cartas pretas aleatórias, o Leitor deverá escolher apenas uma.</p>
+                <p>A carta escolhida pelo Leitor será apresentada aos outros jogadores, as outras serão devolvidas ao monte.</p>
+                <p>Após a carta preta ser revelada, todos os jogadores escolherão uma carta branca das 5 que ele tem. As cartas são viradas de face para baixo e reveladas apenas quando todos tiverem escolhido suas respectivas cartas.</p>
+                <p>Logo após de todos os jogadores terem escolhido uma carta branca, o Leitor então poderá ler as respostas e escolher conforme seu critério a carta vencedora.</p>
+                <p>O jogador que escolheu a carta branca vencedora será o vencedor da rodada, podendo assim finalizar a rodada e começar uma nova, assim como um Leitor novo.</p>
+            </div>
+            <div class="modal-footer bg-dark modal-style">
+                <p>@GBLTech produção</p>
             </div>
         </div>
     </div>
-
+</div>
+@if (!isset($jogo))
+    @if (Auth::check())
         @include('layouts.modalForm', [
             'id_modal' => 'modal-delete-user',
             'title_modal' => 'Deletar meu usuario',
