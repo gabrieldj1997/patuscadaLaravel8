@@ -5,7 +5,7 @@
         </div>
         <div class="row col-12">
             @foreach (App\Models\Jogo::where('estado_jogo', 0)->get() as $jogo)
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     <div class="card card_jogo_aberto">
                         <a href="jogo/{{ $jogo->id }}">
                             <div class="card-header">

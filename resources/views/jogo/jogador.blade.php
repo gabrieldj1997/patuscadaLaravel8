@@ -6,7 +6,7 @@
         <div class="row col-12">
             @foreach (DB::table('tb_jogador_cartas')->join('tb_jogos', 'tb_jogador_cartas.id_jogo', '=', 'tb_jogos.id')->where('tb_jogador_cartas.id_jogador', Auth::user()->id)->where('tb_jogos.estado_jogo', '1')->get() as $jogadorCartas)
                 @if ($jogadorCartas->estado_jogo == 1)
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <div class="card card_jogo_aberto">
                             <a href="jogo/{{ $jogadorCartas->id_jogo }}">
                                 <div class="card-header">
