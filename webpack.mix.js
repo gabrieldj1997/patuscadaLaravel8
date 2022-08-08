@@ -26,7 +26,7 @@ mix.js('resources/js/app.js', 'public/js')
     .styles(['resources/css/app.css'
         , 'resources/css/jogo.css'],
         'public/css/jogo.css')
-    .styles(['resources/css/font.css'],
+    .styles(['resources/css/fonts.css'],
         'public/css/fonts.css')
     .sourceMaps()
     .version()

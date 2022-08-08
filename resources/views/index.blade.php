@@ -16,6 +16,7 @@ if (Session::has('error')) {
     <title>Login Patuscada v.Dj1997</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fonts.css') }}" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://kit.fontawesome.com/e68b1aba6f.js" crossorigin="anonymous"></script>
 </head>

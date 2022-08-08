@@ -3,16 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" media="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="APP_KEY" content="{{ config('broadcasting.connections.pusher.key') }}" />
 
     <title>Jogo</title>
 
     <link href="{{ url(mix('css/app.css')) }}" rel="stylesheet">
-    <link href="{{ asset('css/jogo.css') }}" rel="stylesheet">
+    <link href="{{ url(mix('css/fonts.css')) }}" rel="stylesheet">
+    <link href="{{ url(mix('css/jogo.css')) }}" rel="stylesheet">
 
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ url(mix('js/app.js')) }}"></script>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="{{ url(mix('js/app.js')) }}"></script>
     @if (isset($jogo))
