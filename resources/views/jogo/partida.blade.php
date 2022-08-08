@@ -48,8 +48,8 @@
                 @include('jogo.salaEspera')
 
                 {{-- Jogo estado iniciado --}}
-            @else
-                <div id="mensagens">
+            @elseif ($jogo->estado_jogo == 1)
+                <div id="mensagens" class="tittle-stylle-1">
                     @switch($rodada->id_estado_rodada)
                         {{-- Leitor escolhendo carta preta --}}
                         @case(1)
@@ -116,6 +116,8 @@
                         @include('jogo.cartasBrancas')
                     </div>
                 </div>
+            @else
+                @include('jogo.finalizado')
             @endif
         @else
             <h1>Jogo não encontrado</h1>

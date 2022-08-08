@@ -251,11 +251,12 @@ class JogoController extends Controller
         $this->DistribuirCartas($jogo);
     }
 
-    public function FinalizarPartida($id_jogo)
+    public function FinalizarPartida($id)
     {
-        $jogo = Jogo::find($id_jogo);
+        $jogo = Jogo::find($id);
         $jogo->estado_jogo = 2;
         $jogo->save();
+        return redirect()->route('jogo.partida', $id);
     }
 
     public function FindPartida(Request $req)

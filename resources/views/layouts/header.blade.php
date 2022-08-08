@@ -67,7 +67,7 @@
                         @endif
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">version 2.5.0</a>
+                        <a class="nav-link disabled" href="#">version 2.9.0</a>
                     </li>
                     
                 </ul>
@@ -75,7 +75,7 @@
         </div>
     @else
         <ul class="navbar-nav mr-auto">
-            <div class="row row-cols-2">
+            <div class="row row-cols-12">
                 <div class="col">
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ route('index') }}">Voltar</a>
@@ -86,6 +86,13 @@
                         <a class="nav-link" href="#">{{ $jogo->codigo }}</a>
                     </li>
                 </div>
+                @if($jogo->estado_jogo == 1)
+                <div class="col">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../api/jogoApi/finish/{{ $jogo->id }}">Finalizar</a>
+                    </li>
+                </div>
+                @endif
             </div>
         </ul>
     @endif

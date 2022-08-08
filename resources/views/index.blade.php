@@ -43,9 +43,15 @@ if (Session::has('error')) {
             @endforeach
         @endif
 
-        @include('jogo.jogoAberto')
+        @if (!Auth::check())
+            <div class="tittle-stylle-1 col-12" style="text-align: center">
+                <h5>Faca o login e comece a jogar agora!</h5>
+            </div>
+        @else
+            @include('jogo.jogoAberto')
 
-        @include('jogo.jogador')
+            @include('jogo.jogador')
+        @endif
 
         @include('layouts.footer')
     </div>
