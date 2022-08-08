@@ -67,7 +67,7 @@
                         @endif
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">version 2.9.0</a>
+                        <a class="nav-link disabled" href="#">version 3.5.0</a>
                     </li>
                     
                 </ul>
