@@ -55,4 +55,15 @@ body{
 .social-footer li a:hover {
     color: #29a19c;
   }
-  
+.card_jogo_aberto{
+    margin: 30px;
+}
+.card_jogo_aberto .card-body{
+    color: black;
+}
+.tittle-stylle-1{
+    font-family: Spacetime;
+    color: whitesmoke;
+    text-shadow: 0px 0px 22px blue;
+    font-style: italic;
+}

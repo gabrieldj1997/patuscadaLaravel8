@@ -124,7 +124,7 @@ class JogoController extends Controller
 
         for ($i = count($cartas_pretas_jogo); $i < (3 < count($cartas_pretas_monte) ? 3 : count($cartas_pretas_monte)); $i++) {
             $carta = array_splice($cartas_pretas_monte, rand(0, count($cartas_pretas_monte) - 1), 1);
-            array_push($cartas_pretas_jogo, $carta);
+            array_push($cartas_pretas_jogo, $carta[0]);
         }
 
         $jogo->cartas_pretas_jogo = json_encode($cartas_pretas_jogo);

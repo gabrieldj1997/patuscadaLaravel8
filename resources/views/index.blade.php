@@ -24,7 +24,7 @@ if (Session::has('error')) {
     <div class="container">
 
         @include('layouts.header')
-        
+
         @if (isset($message))
             <div class="alert alert-success">
                 {{ $message }}
@@ -36,13 +36,18 @@ if (Session::has('error')) {
             </div>
         @endif
         @if ($errors->any())
-        @foreach ($errors->all() as $input_error)
-            <div class="alert alert-danger">
-                {{ $input_error }}
-            </div>
-        @endforeach
-    @endif
-    @include('layouts.footer')
+            @foreach ($errors->all() as $input_error)
+                <div class="alert alert-danger">
+                    {{ $input_error }}
+                </div>
+            @endforeach
+        @endif
+
+        @include('jogo.jogoAberto')
+
+        @include('jogo.jogador')
+
+        @include('layouts.footer')
     </div>
 </body>
 
@@ -63,6 +68,12 @@ if (Session::has('error')) {
             }
             document.querySelector('#input-codigo').value = codigo
         }
+        document.querySelector('#input-codigo_enter').addEventListener('keyup', (event) => {
+            event.target.value = event.target.value.toUpperCase()
+        }, false)
+        document.querySelector('#input-codigo').addEventListener('keyup', (event) => {
+            event.target.value = event.target.value.toUpperCase()
+        }, false)
     </script>
 @endif
 
