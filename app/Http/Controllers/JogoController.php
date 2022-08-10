@@ -253,10 +253,11 @@ class JogoController extends Controller
 
     public function FinalizarPartida($id)
     {
-        if(Auth::user()->id != Jogo::find($id)->id_criador){
-            return redirect()->route(["error" => "Você não é o criador do jogo"]);
-        }
         $jogo = Jogo::find($id);
+
+        if(Auth::user()->id != $jogo->id_jogador_criador)
+            return redirect()->route('jogo.partida', ["id" => $id, "error" => "Você não é o criador do jogo"]);
+        
         $jogo->estado_jogo = 2;
         $jogo->save();
         return redirect()->route('jogo.partida', $id);

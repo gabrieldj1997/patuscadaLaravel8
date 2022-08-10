@@ -46,7 +46,6 @@ Route::controller(JogoController::class)->prefix('jogoApi')->name('jogoApi.')->g
     Route::post('/start', 'StartPartida')->name('start');
     Route::post('/next', 'FinalizarRodada')->name('next');
     Route::post('/find', 'FindPartida')->name('find');
-    Route::get('/finish/{id}', 'FinalizarPartida')->name('finish');
     Route::delete('/delete', 'DeletePartida')->name('delete');
     //Eventos de Jogo
     Route::post('/{jogoId}/cartapreta', 'ChooseCartaPreta')->name('chossecartapreta');

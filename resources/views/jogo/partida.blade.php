@@ -42,6 +42,25 @@
     <div class="container">
 
         @include('layouts.header', ['jogo', $jogo])
+
+        @if (Session::has('message'))
+            <div class="alert alert-success">
+                {{ Session::get('message') }}
+            </div>
+        @endif
+        @if (Session::has('error'))
+            <div class="alert alert-danger">
+                {{ Session::get('error') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            @foreach ($errors->all() as $input_error)
+                <div class="alert alert-danger">
+                    {{ $input_error }}
+                </div>
+            @endforeach
+        @endif
+
         @if (isset($jogo))
 
             {{-- Jogo estado aguardando inicio --}}

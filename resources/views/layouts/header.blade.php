@@ -89,7 +89,7 @@
                 @if ($jogo->estado_jogo == 1 && Auth::user()->id == $jogo->id_jogador_criador)
                     <div class="col">
                         <li class="nav-item active">
-                            <a class="nav-link" href="../api/jogoApi/finish/{{ $jogo->id }}">Finalizar</a>
+                            <a class="nav-link" href="finish/{{ $jogo->id }}">Finalizar</a>
                         </li>
                     </div>
                 @endif
