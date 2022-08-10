@@ -54,7 +54,7 @@ if (botao_cartas_pretas.length > 0) {
                 axios(options);
                 cartas_pretas_leitor.forEach(item => {
                     if (item.attributes.idcartapreta.value != idcarta) {
-                        item.remove();
+                        item.parentElement.remove();
                     }
                 })
 
