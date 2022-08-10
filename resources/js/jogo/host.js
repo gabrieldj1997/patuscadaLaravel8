@@ -7,13 +7,13 @@ const { default: axios } = require('axios');
 // Pusher.logToConsole = true;
 
 //URL's
-const startGame = window.location.origin + '/api/jogoApi/start';
-const finishRodada = window.location.origin + '/api/jogoApi/next';
+const startGameUrl = window.location.origin + '/api/jogoApi/start';
+const deleteGameUrl = window.location.origin + '/api/jogoApi/delete';
+const finishRodadaUrl = window.location.origin + '/api/jogoApi/next';
 
 //Variaveis
 const jogadores_list = document.querySelector('#list_Jogadores');
 const buttonFinalizarRodada = document.querySelector('#buttonFinalizarRodada');
-const inputIdJogo = document.querySelector('#inputIdJogo');
 
 window.Echo.channel('jogo-jogada-' + jogoId)
     .listen('.jogadas', (data) => {
@@ -35,7 +35,7 @@ if (estadoJogo == 0) {
         if (host_confirm) {
             const options = {
                 method: 'POST',
-                url: startGame,
+                url: startGameUrl,
                 data: {
                     id_jogo: jogoId,
                     id_user: myId,
@@ -46,18 +46,42 @@ if (estadoJogo == 0) {
             axios(options);
         }
     }
+    var button_delete = document.querySelector('#button_delete');
+    button_delete.onclick = () => {
+        let confirmMessage = 'Tem certeza que deseja deletar a sala de jogo? \n';
+        let host_confirm = confirm(confirmMessage);
+        if (host_confirm) {
+            const options = {
+                method: 'DELETE',
+                url: deleteGameUrl,
+                data: {
+                    id_jogo: jogoId,
+                    my_id: myId
+                }
+            }
+            console.log(options.data)
+            axios(options).then(resp => {
+                if(resp.data.codigo == 1){
+                    alert(resp.data.success)
+                    window.location.href = window.location.origin;
+                    return
+                }
+    
+                alert(resp.data.error)
+            });
+        }
+    }
 }
 if (buttonFinalizarRodada != null) {
     buttonFinalizarRodada.onclick = () => {
         options = {
             method: 'POST',
-            url: finishRodada,
+            url: finishRodadaUrl,
             data: {
-                id_jogo: inputIdJogo.value,
+                id_jogo: jogoId,
                 my_id: myId
             }
         }
         axios(options)
-
     }
 }

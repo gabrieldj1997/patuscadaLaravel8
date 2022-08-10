@@ -126,10 +126,6 @@
                 onclick="window.location='{{ route('index') }}'">Voltar</button>
         @endif
 
-        @if (Auth::user()->id == $jogo->id_jogador_criador)
-            <input id="inputIdJogo" type="text"  value="{{$jogo->id}}" hidden/>
-        @endif
-
     </div>
 </body>
 @if ($jogo->estado_jogo == 0)

@@ -1,14 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-if (Session::has('message')) {
-    $message = Session::get('message');
-}
-if (Session::has('error')) {
-    $error = Session::get('error');
-}
-?>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,14 +17,14 @@ if (Session::has('error')) {
 
         @include('layouts.header')
 
-        @if (isset($message))
+        @if (Session::has('message'))
             <div class="alert alert-success">
-                {{ $message }}
+                {{ Session::get('message') }}
             </div>
         @endif
-        @if (isset($error))
+        @if (Session::has('error'))
             <div class="alert alert-danger">
-                {{ $error }}
+                {{ Session::get('error') }}
             </div>
         @endif
         @if ($errors->any())

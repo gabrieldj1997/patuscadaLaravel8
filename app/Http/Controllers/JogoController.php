@@ -253,6 +253,9 @@ class JogoController extends Controller
 
     public function FinalizarPartida($id)
     {
+        if(Auth::user()->id != Jogo::find($id)->id_criador){
+            return redirect()->route(["error" => "Você não é o criador do jogo"]);
+        }
         $jogo = Jogo::find($id);
         $jogo->estado_jogo = 2;
         $jogo->save();
@@ -362,5 +365,21 @@ class JogoController extends Controller
             $jogador->save();
         };
         return $jogadores;
+    }
+
+    public function DeletePartida(Request $req){
+
+        $jogo = Jogo::find($req->input('id_jogo'));
+
+        if($req->input('my_id') != $jogo->id_jogador_criador){
+            return ["codigo" => 0, "error" => "Você não tem permissão para deletar essa partida!"];
+        }
+
+        if($jogo->estado_jogo != 0)
+            return ["codigo" => 0, "error" => "Você não pode deletar uma partida que já começou/finalizou!"];
+
+        $jogo->delete();
+
+        return ["codigo" => 1, "success" => "Partida deletada com sucesso"];
     }
 }
