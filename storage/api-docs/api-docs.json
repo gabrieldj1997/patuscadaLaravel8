@@ -1,0 +1,585 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Patuscada API",
+        "description": "Documentação da API Patuscada em Laravel 8",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/cartasbrancas": {
+            "get": {
+                "tags": [
+                    "Cartas Brancas"
+                ],
+                "summary": "Listar todas as cartas brancas",
+                "operationId": "c73beeacae05b3342385c5b8d6f7aa5b",
+                "responses": {
+                    "200": {
+                        "description": "Lista de cartas brancas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "texto": {
+                                                "type": "string",
+                                                "example": "Uma resposta engraçada"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Cartas Brancas"
+                ],
+                "summary": "Cadastrar nova carta branca",
+                "operationId": "02118e081c951dc1ead9982594ecb010",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "texto"
+                                ],
+                                "properties": {
+                                    "texto": {
+                                        "type": "string",
+                                        "example": "Algo engraçado para jogar"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Carta branca criada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "texto": {
+                                            "type": "string",
+                                            "example": "Algo engraçado para jogar"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cartasbrancas/{id}": {
+            "get": {
+                "tags": [
+                    "Cartas Brancas"
+                ],
+                "summary": "Obter uma carta branca por ID",
+                "operationId": "33395732a92db0c2443cd3ae9026aa86",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da carta branca",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Carta branca encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "texto": {
+                                            "type": "string",
+                                            "example": "Uma resposta engraçada"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Carta branca não encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Cartas Brancas"
+                ],
+                "summary": "Atualizar uma carta branca",
+                "operationId": "17e9d571170300f5b352e65ad8feb163",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da carta branca a ser atualizada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "texto"
+                                ],
+                                "properties": {
+                                    "texto": {
+                                        "type": "string",
+                                        "example": "Texto atualizado da carta"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Carta branca atualizada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "texto": {
+                                            "type": "string",
+                                            "example": "Texto atualizado da carta"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Carta branca não encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Cartas Brancas"
+                ],
+                "summary": "Deletar uma carta branca",
+                "operationId": "61390aaec899f6669dd12c66884b0476",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da carta branca a ser deletada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Carta branca deletada com sucesso"
+                    },
+                    "404": {
+                        "description": "Carta branca não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/cartaspretas": {
+            "get": {
+                "tags": [
+                    "Cartas Pretas"
+                ],
+                "summary": "Listar todas as cartas pretas",
+                "operationId": "8591f12530b2533024242b86347743ac",
+                "responses": {
+                    "200": {
+                        "description": "Lista de cartas pretas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "texto": {
+                                                "type": "string",
+                                                "example": "__________ é tudo que preciso."
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Cartas Pretas"
+                ],
+                "summary": "Cadastrar nova carta preta",
+                "operationId": "e114cecece0a12e38e3684948cafce24",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "texto"
+                                ],
+                                "properties": {
+                                    "texto": {
+                                        "type": "string",
+                                        "example": "__________ é tudo que preciso."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Carta preta criada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "texto": {
+                                            "type": "string",
+                                            "example": "__________ é tudo que preciso."
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cartaspretas/{id}": {
+            "get": {
+                "tags": [
+                    "Cartas Pretas"
+                ],
+                "summary": "Obter uma carta preta por ID",
+                "operationId": "938488c799232597d903816974be99d5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da carta preta",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Carta preta encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "texto": {
+                                            "type": "string",
+                                            "example": "__________ é tudo que preciso."
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Carta preta não encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Cartas Pretas"
+                ],
+                "summary": "Atualizar uma carta preta",
+                "operationId": "63323d1cbca976a31b9807a04a49d100",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da carta preta a ser atualizada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "texto"
+                                ],
+                                "properties": {
+                                    "texto": {
+                                        "type": "string",
+                                        "example": "Texto atualizado da carta preta."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Carta preta atualizada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "texto": {
+                                            "type": "string",
+                                            "example": "Texto atualizado da carta preta."
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Carta preta não encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Cartas Pretas"
+                ],
+                "summary": "Deletar uma carta preta",
+                "operationId": "7f6cecf670899c93f3b23c04444a5d7c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da carta preta a ser deletada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Carta preta deletada com sucesso"
+                    },
+                    "404": {
+                        "description": "Carta preta não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}": {
+            "get": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Obter usuário por ID",
+                "description": "Retorna os dados de um usuário específico pelo seu ID.",
+                "operationId": "getUserById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuário encontrado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Gabriel"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "gabriel@email.com"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-01-01T12:00:00Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-01-01T12:00:00Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Cartas Brancas",
+            "description": "Cartas Brancas"
+        },
+        {
+            "name": "Cartas Pretas",
+            "description": "Cartas Pretas"
+        },
+        {
+            "name": "Usuários",
+            "description": "Usuários"
+        }
+    ]
+}
