@@ -1,64 +1,81 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+🃏 Patuscada - Jogo de Cartas em Tempo Real
+Patuscada é um jogo de cartas online, desenvolvido com Laravel, que permite partidas em tempo real entre usuários autenticados através de WebSockets. Ideal para se divertir com amigos ou desafiar outros jogadores!
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+🚀 Funcionalidades
+Autenticação de usuários (login e registro)
 
-## About Laravel
+Partidas em tempo real via WebSockets
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Sistema de salas para organizar as partidas
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Backend robusto com Laravel + MySQL
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Integração com Pusher para comunicação em tempo real
 
-## Learning Laravel
+📦 Requisitos
+Antes de rodar o projeto, certifique-se de ter os seguintes softwares instalados na sua máquina:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+PHP >= 8.2
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Composer
 
-## Laravel Sponsors
+MySQL
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Node.js >= 16
 
-### Premium Partners
+Laravel CLI (opcional)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+⚙️ Instalação
+Clone o repositório:
 
-## Contributing
+git clone https://github.com/seu-usuario/patuscada.git
+cd patuscada
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Instale as dependências do PHP:
 
-## Code of Conduct
+composer install
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Instale as dependências do Node.js:
 
-## Security Vulnerabilities
+npm install && npm run dev
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Configure o ambiente:
 
-## License
+Copie o arquivo .env.example para .env:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+cp .env.example .env
+
+Gere a chave da aplicação:
+
+php artisan key:generate
+
+Execute as migrações:
+
+php artisan migrate
+
+Inicie o servidor:
+
+php artisan serve
+
+🔌 WebSockets com Pusher
+Este projeto usa Pusher para permitir comunicação em tempo real entre os jogadores. Certifique-se de configurar corretamente as chaves da sua conta no .env. Você pode criar uma conta gratuita em: https://pusher.com/
+
+🛠️ Principais Dependências
+Backend (Laravel)
+laravel/framework: Estrutura principal da aplicação
+
+pusher/pusher-php-server: Integração com WebSockets
+
+laravel/ui (ou Jetstream/Breeze): Interface de autenticação (dependendo de como você configurou)
+
+guzzlehttp/guzzle: Requisições HTTP
+
+Frontend
+Laravel Mix / Vite: Compilação de assets
+
+Pusher JS: Escuta dos eventos em tempo real no navegador
+
+Axios: Requisições HTTP frontend (opcional)
+
+📬 Contato
+Caso tenha dúvidas ou sugestões, sinta-se à vontade para abrir uma issue ou entrar em contato.
