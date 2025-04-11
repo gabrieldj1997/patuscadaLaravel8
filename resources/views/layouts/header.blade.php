@@ -3,7 +3,7 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-6">
-            <a class="navbar-brand" href="#">Patuscada</a>
+            <a class="navbar-brand" href="#">Patuscada teste</a>
         </div>
     </div>
     @if (!isset($jogo))
