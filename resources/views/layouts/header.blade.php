@@ -235,7 +235,7 @@
                     'type' => 'password',
                 ],
                 (object) [
-                    'label' => 'Digite seu email:',
+                    'label' => 'Digite seu email: (opcional)',
                     'id' => 'email_input',
                     'name' => 'email',
                     'type' => 'text',

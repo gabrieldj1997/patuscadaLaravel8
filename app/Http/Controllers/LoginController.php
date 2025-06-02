@@ -37,7 +37,7 @@ class LoginController extends Controller
             $login->name = $req->input('name');
             $login->nickname = $req->input('nickname');
             $login->password = Hash::make($req->input('password'));
-            $login->email = $req->input('email');
+            $login->email = $req->input('email') ?? null;
             $login->save();
 
             if (Auth::attempt(['nickname' => $req->input('nickname'), 'password' => $req->input('password')], true)) {

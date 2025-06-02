@@ -14,7 +14,7 @@
                     <div class="row">
                         @foreach ($inputs_modal_form as $input)
                             <div class="col-md-12" style="flex-flow: column;">
-                                <div class="col-md-5">
+                                <div class="col-md-12">
                                 <label for="{{ $input->id }}">{{ $input->label }}</label>
                                 </div>
                                 <div class="col-md-12">
