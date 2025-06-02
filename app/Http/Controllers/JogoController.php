@@ -12,7 +12,6 @@ use App\Models\JogadorCartas;
 use App\Models\Rodada;
 use App\Events\MessageJogo;
 use App\Events\JogadasJogo;
-// use App\Events\CartasJogo;
 
 class JogoController extends Controller
 {

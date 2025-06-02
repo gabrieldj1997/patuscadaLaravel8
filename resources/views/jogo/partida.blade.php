@@ -1,3 +1,4 @@
+<?php use Illuminate\Support\Facades\Auth; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -142,7 +143,7 @@
         @else
             <h1>Jogo não encontrado</h1>
             <button type="button" class="btn btn-primary"
-                onclick="window.location='{{ route('index') }}'">Voltar</button>
+                onclick="window.location='{{ url('/') }}'">Voltar</button>
         @endif
 
     </div>
