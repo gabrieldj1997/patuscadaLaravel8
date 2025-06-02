@@ -141,8 +141,8 @@
             'inputs_modal_form' => [
                 (object) [
                     'label' => 'Confirme sua senha:',
-                    'id' => 'input-password',
-                    'name' => 'name',
+                    'id' => 'password',
+                    'name' => 'password',
                     'type' => 'text',
                 ],
             ],

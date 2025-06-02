@@ -9,10 +9,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Rules\ReCAPTCHAv3;
-use Illuminate\Support\Facades\Redirect;
 use Exception;
-use stdClass;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -29,7 +27,7 @@ class LoginController extends Controller
     }
     public function RegisterLogin(LoginFormRequest $req)
     {
-        if($req->input('password') != $req->input('password_confirmation')){
+        if ($req->input('password') != $req->input('password_confirmation')) {
             return redirect()->route('index')->with('error', 'Senhas não conferem.');
         }
         try {
@@ -54,7 +52,7 @@ class LoginController extends Controller
             $users = User::where('status', 'online')->get();
             return response($users, 200);
         } catch (Exception $e) {
-            return response($e->getMessage(),200);
+            return response($e->getMessage(), 200);
         }
     }
     public function UpdateLogin(LoginFormRequest $req)
@@ -85,25 +83,25 @@ class LoginController extends Controller
                 return redirect()->route('index')->with('error', 'Não é possivel deletar outro usuario.');
             }
             try {
-                $player = User::find($id);
+                $player = User::find(Auth::user()->id);
                 if (isset($player) && Hash::check($req->input('password'), $player->password)) {
-                    Auth::logout();
                     $player->delete();
+                    Auth::logout();
                     return redirect()->route('index')->with('message', 'Usuario deletado com sucesso.');
                 } else {
+                    Log::info('Password check failed for user ID: ' . $id);
                     return redirect()->route('index')->with('error', 'Senha invalida.');
                 }
             } catch (Exception $e) {
                 return redirect()->route('index')->with('error', 'Error no servidor. ' . $e->getMessage());
             }
         } else {
-
-            $player = User::find()->where('id', $id)->where('password', Hash::make($req->input('password')))->first();
-            if (isset($player)) {
+            $player = User::find($id);
+            if (isset($player) && Hash::check($req->input('password'), $player->password)) {
                 $player->delete();
-                return redirect()->route('index')->with('message', 'Usuario deletado com sucesso.');
+                return redirect()->route('index')->with('message', 'Usuário deletado com sucesso.');
             }
-            return redirect()->route('index')->with('error', 'Usuario ou senha invalidos, usuario de id ' . $id . ' não encontrado.');
+            return redirect()->route('index')->with('error', "Usuário ou senha inválidos.");
         }
     }
     public function Truncate()
