@@ -27,7 +27,7 @@ class LoginFormRequest extends FormRequest
         return [
             'name' => 'required|string|max:50',
             'nickname' => 'required|string|max:15|unique:users',
-            'email' => 'max:50|unique:users',
+            'email' => 'max:50',
             'password' => 'required'
         ];
     }
@@ -38,8 +38,7 @@ class LoginFormRequest extends FormRequest
             'nickname.required' => 'O campo nickname é obrigatório',
             'nickname.unique' => 'Este nickname ja esta em uso',
             'password.required' => 'O campo senha é obrigatório',
-            'nickame.unique' => 'O nickname já está em uso',
-            'email.unique' => 'O email já está em uso'
+            'nickame.unique' => 'O nickname já está em uso'
         ];
     }
 }
